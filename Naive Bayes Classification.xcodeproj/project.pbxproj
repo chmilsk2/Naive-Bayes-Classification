@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */; };
+		0545971A182F034800D2223A /* trainingimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05459719182F034800D2223A /* trainingimages.txt */; };
+		05459720182F050A00D2223A /* DigitCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitCollectionViewController.mm */; };
+		056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 056761F6182F14D700C1A3EA /* DigitParser.cpp */; };
+		05AB2715182F49A40097D95A /* traininglabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05AB2714182F49A40097D95A /* traininglabels.txt */; };
+		05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB2716182F49F00097D95A /* DigitLabelParser.cpp */; };
+		05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB2719182F4D7D0097D95A /* DigitSet.cpp */; };
+		05AB271E182F63820097D95A /* Digit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB271C182F63820097D95A /* Digit.cpp */; };
 		05ABBFFD182EF0AF00116729 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ABBFFC182EF0AF00116729 /* Foundation.framework */; };
 		05ABBFFF182EF0AF00116729 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ABBFFE182EF0AF00116729 /* CoreGraphics.framework */; };
 		05ABC001182EF0AF00116729 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ABC000182EF0AF00116729 /* UIKit.framework */; };
@@ -32,6 +40,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0537E3901838006D002A3F1C /* DigitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitCollectionViewCell.h; sourceTree = "<group>"; };
+		0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitCollectionViewCell.m; sourceTree = "<group>"; };
+		05459719182F034800D2223A /* trainingimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trainingimages.txt; sourceTree = "<group>"; };
+		0545971E182F050A00D2223A /* DigitCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitCollectionViewController.h; sourceTree = "<group>"; };
+		0545971F182F050A00D2223A /* DigitCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitCollectionViewController.mm; sourceTree = "<group>"; };
+		056761F6182F14D700C1A3EA /* DigitParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitParser.cpp; sourceTree = "<group>"; };
+		056761F7182F14D700C1A3EA /* DigitParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitParser.h; sourceTree = "<group>"; };
+		05AB2714182F49A40097D95A /* traininglabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = traininglabels.txt; sourceTree = "<group>"; };
+		05AB2716182F49F00097D95A /* DigitLabelParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitLabelParser.cpp; sourceTree = "<group>"; };
+		05AB2717182F49F00097D95A /* DigitLabelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitLabelParser.h; sourceTree = "<group>"; };
+		05AB2719182F4D7D0097D95A /* DigitSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitSet.cpp; sourceTree = "<group>"; };
+		05AB271A182F4D7D0097D95A /* DigitSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitSet.h; sourceTree = "<group>"; };
+		05AB271C182F63820097D95A /* Digit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Digit.cpp; sourceTree = "<group>"; };
+		05AB271D182F63820097D95A /* Digit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Digit.h; sourceTree = "<group>"; };
 		05ABBFF9182EF0AF00116729 /* Naive Bayes Classification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Naive Bayes Classification.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ABBFFC182EF0AF00116729 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05ABBFFE182EF0AF00116729 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,6 +96,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0545971B182F034E00D2223A /* Training */ = {
+			isa = PBXGroup;
+			children = (
+				05AB2714182F49A40097D95A /* traininglabels.txt */,
+				05459719182F034800D2223A /* trainingimages.txt */,
+			);
+			name = Training;
+			sourceTree = "<group>";
+		};
+		0545971C182F035C00D2223A /* Digit Classification */ = {
+			isa = PBXGroup;
+			children = (
+				0545971B182F034E00D2223A /* Training */,
+			);
+			name = "Digit Classification";
+			sourceTree = "<group>";
+		};
+		05459721182F050F00D2223A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				056761F7182F14D700C1A3EA /* DigitParser.h */,
+				056761F6182F14D700C1A3EA /* DigitParser.cpp */,
+				05AB2717182F49F00097D95A /* DigitLabelParser.h */,
+				05AB2716182F49F00097D95A /* DigitLabelParser.cpp */,
+				05AB271A182F4D7D0097D95A /* DigitSet.h */,
+				05AB2719182F4D7D0097D95A /* DigitSet.cpp */,
+				05AB271D182F63820097D95A /* Digit.h */,
+				05AB271C182F63820097D95A /* Digit.cpp */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		05459722182F051400D2223A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0537E3901838006D002A3F1C /* DigitCollectionViewCell.h */,
+				0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		05459723182F051900D2223A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0545971E182F050A00D2223A /* DigitCollectionViewController.h */,
+				0545971F182F050A00D2223A /* DigitCollectionViewController.mm */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		05ABBFF0182EF0AF00116729 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +179,9 @@
 		05ABC002182EF0AF00116729 /* Naive Bayes Classification */ = {
 			isa = PBXGroup;
 			children = (
+				05459723182F051900D2223A /* Controller */,
+				05459722182F051400D2223A /* View */,
+				05459721182F050F00D2223A /* Model */,
 				05ABC00B182EF0AF00116729 /* AppDelegate.h */,
 				05ABC00C182EF0AF00116729 /* AppDelegate.m */,
 				05ABC00E182EF0AF00116729 /* Images.xcassets */,
@@ -118,6 +193,7 @@
 		05ABC003182EF0AF00116729 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0545971C182F035C00D2223A /* Digit Classification */,
 				05ABC004182EF0AF00116729 /* Naive Bayes Classification-Info.plist */,
 				05ABC005182EF0AF00116729 /* InfoPlist.strings */,
 				05ABC008182EF0AF00116729 /* main.m */,
@@ -219,8 +295,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0545971A182F034800D2223A /* trainingimages.txt in Resources */,
 				05ABC007182EF0AF00116729 /* InfoPlist.strings in Resources */,
 				05ABC00F182EF0AF00116729 /* Images.xcassets in Resources */,
+				05AB2715182F49A40097D95A /* traininglabels.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +319,12 @@
 			files = (
 				05ABC00D182EF0AF00116729 /* AppDelegate.m in Sources */,
 				05ABC009182EF0AF00116729 /* main.m in Sources */,
+				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
+				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
+				0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */,
+				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
+				05459720182F050A00D2223A /* DigitCollectionViewController.mm in Sources */,
+				05AB271E182F63820097D95A /* Digit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +446,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Naive Bayes Classification/Naive Bayes Classification-Prefix.pch";
 				INFOPLIST_FILE = "Naive Bayes Classification/Naive Bayes Classification-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -375,7 +461,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Naive Bayes Classification/Naive Bayes Classification-Prefix.pch";
 				INFOPLIST_FILE = "Naive Bayes Classification/Naive Bayes Classification-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -441,6 +529,7 @@
 				05ABC027182EF0B000116729 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05ABC028182EF0B000116729 /* Build configuration list for PBXNativeTarget "Naive Bayes ClassificationTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +538,7 @@
 				05ABC02A182EF0B000116729 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
