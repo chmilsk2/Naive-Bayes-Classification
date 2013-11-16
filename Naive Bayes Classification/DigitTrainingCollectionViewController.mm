@@ -6,31 +6,52 @@
 //  Copyright (c) 2013 Troy Chmieleski. All rights reserved.
 //
 
-#import "DigitCollectionViewController.h"
+#import "DigitTrainingCollectionViewController.h"
+#import "DigitTestingCollectionViewController.h"
 #import "DigitParser.h"
 #import "DigitLabelParser.h"
 #import "DigitSet.h"
 
+#define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
+#define TEST_BUTTON_TITLE @"Test"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
-#define DIGIT_SIZE_MULTIPLIER 6.0f
-#define DigitCollectionViewCellIdentifier @"DigitCollectionViewCellIdentifier"
+#define DigitTrainingCollectionViewCellIdentifier @"DigitTrainingCollectionViewCellIdentifier"
 
-@implementation DigitCollectionViewController {
+@implementation DigitTrainingCollectionViewController {
 	DigitSet mDigitSet;
+	UIBarButtonItem *_testButton;
+	UIColor *_barTintColor;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
+	self = [super initWithCollectionViewLayout:layout];
+	
+	if (self) {
+		_barTintColor = [UIColor blackColor];
+	}
+	
+	return self;
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	[self setUpNavigation];
 	[self setUpCollection];
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
 }
 
+- (void)setUpNavigation {
+	[self.navigationItem setTitle:DIGIT_TRAINING_NAVIGATION_ITEM_TITLE];
+	[self.navigationItem setRightBarButtonItem:self.testButton];
+	[self.navigationController.navigationBar setTintColor:_barTintColor];
+}
+
 - (void)setUpCollection {
-	[self.collectionView registerClass:[DigitCollectionViewCell class] forCellWithReuseIdentifier:DigitCollectionViewCellIdentifier];
+	[self.collectionView registerClass:[DigitCollectionViewCell class] forCellWithReuseIdentifier:DigitTrainingCollectionViewCellIdentifier];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -40,7 +61,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-	DigitCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:DigitCollectionViewCellIdentifier forIndexPath:indexPath];
+	DigitCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:DigitTrainingCollectionViewCellIdentifier forIndexPath:indexPath];
 
 	cell.delegate = self;
 	cell.dataSource = self;
@@ -70,6 +91,26 @@
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:TRAINING_IMAGES_TEXT_NAME ofType:@"txt"];
 	DigitParser digitParser([filePath fileSystemRepresentation]);
 	digitParser.parseDigits(mDigitSet);
+}
+
+#pragma mark - Test Button
+
+- (UIBarButtonItem *)testButton {
+	if (!_testButton) {
+		_testButton = [[UIBarButtonItem alloc] initWithTitle:TEST_BUTTON_TITLE style:UIBarButtonItemStylePlain target:self action:@selector(testButtonTouched)];
+	}
+	
+	return _testButton;
+}
+
+#pragma mark - Test Button Touched
+
+- (void)testButtonTouched {
+	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+	DigitTestingCollectionViewController *digitTestingCollectionViewController = [[DigitTestingCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitTestingCollectionViewController];
+	
+	[self presentViewController:navController animated:YES completion:nil];
 }
 
 #pragma mark - Digit Collection View Cell Delegate

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "DigitCollectionViewController.h"
+#import "DigitTrainingCollectionViewController.h"
 
 @implementation AppDelegate
 
@@ -18,8 +18,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
 	
 	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-	DigitCollectionViewController *digitCollectionViewController = [[DigitCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitCollectionViewController];
+	DigitTrainingCollectionViewController *digitTrainingCollectionViewController = [[DigitTrainingCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitTrainingCollectionViewController];
 	
 	[self.window setRootViewController:navController];
 	

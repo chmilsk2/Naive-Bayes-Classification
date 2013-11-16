@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */; };
+		0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */; };
+		0537E39918382C82002A3F1C /* testimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39718382C82002A3F1C /* testimages.txt */; };
+		0537E39A18382C82002A3F1C /* testlabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39818382C82002A3F1C /* testlabels.txt */; };
 		0545971A182F034800D2223A /* trainingimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05459719182F034800D2223A /* trainingimages.txt */; };
-		05459720182F050A00D2223A /* DigitCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitCollectionViewController.mm */; };
+		05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */; };
 		056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 056761F6182F14D700C1A3EA /* DigitParser.cpp */; };
 		05AB2715182F49A40097D95A /* traininglabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05AB2714182F49A40097D95A /* traininglabels.txt */; };
 		05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB2716182F49F00097D95A /* DigitLabelParser.cpp */; };
@@ -42,9 +45,13 @@
 /* Begin PBXFileReference section */
 		0537E3901838006D002A3F1C /* DigitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitCollectionViewCell.h; sourceTree = "<group>"; };
 		0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitCollectionViewCell.m; sourceTree = "<group>"; };
+		0537E39318382514002A3F1C /* DigitTestingCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTestingCollectionViewController.h; sourceTree = "<group>"; };
+		0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTestingCollectionViewController.mm; sourceTree = "<group>"; };
+		0537E39718382C82002A3F1C /* testimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testimages.txt; sourceTree = "<group>"; };
+		0537E39818382C82002A3F1C /* testlabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testlabels.txt; sourceTree = "<group>"; };
 		05459719182F034800D2223A /* trainingimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trainingimages.txt; sourceTree = "<group>"; };
-		0545971E182F050A00D2223A /* DigitCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitCollectionViewController.h; sourceTree = "<group>"; };
-		0545971F182F050A00D2223A /* DigitCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitCollectionViewController.mm; sourceTree = "<group>"; };
+		0545971E182F050A00D2223A /* DigitTrainingCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTrainingCollectionViewController.h; sourceTree = "<group>"; };
+		0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTrainingCollectionViewController.mm; sourceTree = "<group>"; };
 		056761F6182F14D700C1A3EA /* DigitParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitParser.cpp; sourceTree = "<group>"; };
 		056761F7182F14D700C1A3EA /* DigitParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitParser.h; sourceTree = "<group>"; };
 		05AB2714182F49A40097D95A /* traininglabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = traininglabels.txt; sourceTree = "<group>"; };
@@ -96,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0537E39618382C3C002A3F1C /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				0537E39718382C82002A3F1C /* testimages.txt */,
+				0537E39818382C82002A3F1C /* testlabels.txt */,
+			);
+			name = Testing;
+			sourceTree = "<group>";
+		};
 		0545971B182F034E00D2223A /* Training */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				0545971B182F034E00D2223A /* Training */,
+				0537E39618382C3C002A3F1C /* Testing */,
 			);
 			name = "Digit Classification";
 			sourceTree = "<group>";
@@ -140,8 +157,10 @@
 		05459723182F051900D2223A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0545971E182F050A00D2223A /* DigitCollectionViewController.h */,
-				0545971F182F050A00D2223A /* DigitCollectionViewController.mm */,
+				0545971E182F050A00D2223A /* DigitTrainingCollectionViewController.h */,
+				0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */,
+				0537E39318382514002A3F1C /* DigitTestingCollectionViewController.h */,
+				0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -296,7 +315,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0545971A182F034800D2223A /* trainingimages.txt in Resources */,
+				0537E39A18382C82002A3F1C /* testlabels.txt in Resources */,
 				05ABC007182EF0AF00116729 /* InfoPlist.strings in Resources */,
+				0537E39918382C82002A3F1C /* testimages.txt in Resources */,
 				05ABC00F182EF0AF00116729 /* Images.xcassets in Resources */,
 				05AB2715182F49A40097D95A /* traininglabels.txt in Resources */,
 			);
@@ -321,9 +342,10 @@
 				05ABC009182EF0AF00116729 /* main.m in Sources */,
 				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
 				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
+				0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */,
 				0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */,
 				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
-				05459720182F050A00D2223A /* DigitCollectionViewController.mm in Sources */,
+				05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */,
 				05AB271E182F63820097D95A /* Digit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
