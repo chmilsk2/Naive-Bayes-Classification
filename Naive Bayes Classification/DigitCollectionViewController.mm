@@ -45,6 +45,8 @@
 	cell.delegate = self;
 	cell.dataSource = self;
 	
+	[cell setNeedsDisplay];
+	
 	return cell;
 }
 
@@ -85,7 +87,7 @@
 	
 	Digit digit = mDigitSet.digits[indexPath.row];
 	
-	char pixelChar = digit.pixelValue(row, col);
+	char pixelChar = digit.pixelValue((int)row, (int)col);
 	
 	if (pixelChar == ' ') {
 		pixelColor = [UIColor whiteColor];
