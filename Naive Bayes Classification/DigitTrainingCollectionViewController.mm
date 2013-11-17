@@ -8,11 +8,13 @@
 
 #import "DigitTrainingCollectionViewController.h"
 #import "DigitTestingCollectionViewController.h"
+#import "DigitDetailsViewController.h"
 #import "DigitParser.h"
 #import "DigitLabelParser.h"
 #import "DigitSet.h"
 
 #define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
+#define TRAIN_BUTTON_TITLE @"Train"
 #define TEST_BUTTON_TITLE @"Test"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
@@ -20,6 +22,7 @@
 
 @implementation DigitTrainingCollectionViewController {
 	DigitSet mDigitSet;
+	UIBarButtonItem *_trainButton;
 	UIBarButtonItem *_testButton;
 	UIColor *_barTintColor;
 }
@@ -42,11 +45,13 @@
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
+	
+	NSLog(@"%@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void)setUpNavigation {
 	[self.navigationItem setTitle:DIGIT_TRAINING_NAVIGATION_ITEM_TITLE];
-	[self.navigationItem setRightBarButtonItem:self.testButton];
+	[self.navigationItem setRightBarButtonItems:@[self.testButton, self.trainButton]];
 	[self.navigationController.navigationBar setTintColor:_barTintColor];
 }
 
@@ -77,6 +82,18 @@
 	return CGSizeMake(digitCellSize, digitCellSize);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	Digit selectedDigit = mDigitSet.digits[indexPath.row];
+	
+	DigitDetailsViewController *digitDetailsViewController = [[DigitDetailsViewController alloc] initWithDigit:selectedDigit];
+	UINavigationController *digitDetailsNavController = [[UINavigationController alloc] initWithRootViewController:digitDetailsViewController];
+	
+	[digitDetailsNavController setModalPresentationStyle:UIModalPresentationFormSheet];
+	[digitDetailsNavController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+	
+	[self presentViewController:digitDetailsNavController animated:YES completion:nil];
+}
+
 - (void)parseDigitLabels {
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:TRAINING_LABELS_TEXT_NAME ofType:@"txt"];
 	DigitLabelParser digitLabelParser([filePath fileSystemRepresentation]);
@@ -91,6 +108,22 @@
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:TRAINING_IMAGES_TEXT_NAME ofType:@"txt"];
 	DigitParser digitParser([filePath fileSystemRepresentation]);
 	digitParser.parseDigits(mDigitSet);
+}
+
+#pragma mark - Train Button
+
+- (UIBarButtonItem *)trainButton {
+	if (!_trainButton) {
+		_trainButton = [[UIBarButtonItem alloc] initWithTitle:TRAIN_BUTTON_TITLE style:UIBarButtonItemStylePlain target:self action:@selector(trainButtonTouched)];
+	}
+	
+	return _trainButton;
+}
+
+#pragma mark - Train Button Touched
+
+- (void)trainButtonTouched {
+	NSLog(@"Train button touched");
 }
 
 #pragma mark - Test Button

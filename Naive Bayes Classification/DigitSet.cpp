@@ -52,3 +52,15 @@ void DigitSet::updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, in
 	
 	// pixelFrequencyMaps[classIndex] = pixelFrequencyMap;
 }
+
+void DigitSet::printFrequencyMap() {
+	int total = 0;
+	
+	for (map<int, int>::iterator it = frequencyMap.begin(); it != frequencyMap.end(); it++) {
+		cout << it->first << " => " << it->second << endl;
+		
+		total += it-> second;
+	}
+	
+	cout << "total: " << total << endl;
+}

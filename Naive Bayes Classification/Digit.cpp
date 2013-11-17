@@ -8,14 +8,20 @@
 
 #include "Digit.h"
 
-Digit::Digit() {}
+Digit::Digit() {
+	// -1 means the digit class has not yet been classified
+	mDigitClass = -1;
+}
 
 Digit::~Digit() {}
+
+int Digit::digitClass() {
+	return mDigitClass;
+}
 
 void Digit::setPixelValue(int row, int col, char value) {
 	mPixels[row][col] = value;
 }
-
 
 char Digit::pixelValue(int row, int col) {
 	char pixelChar = mPixels[row][col];

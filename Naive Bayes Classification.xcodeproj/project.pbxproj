@@ -11,6 +11,8 @@
 		0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */; };
 		0537E39918382C82002A3F1C /* testimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39718382C82002A3F1C /* testimages.txt */; };
 		0537E39A18382C82002A3F1C /* testlabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39818382C82002A3F1C /* testlabels.txt */; };
+		0537E39D183850FB002A3F1C /* DigitDetailsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */; };
+		0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39F18385A5C002A3F1C /* DigitDetailsView.m */; };
 		0545971A182F034800D2223A /* trainingimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05459719182F034800D2223A /* trainingimages.txt */; };
 		05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */; };
 		056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 056761F6182F14D700C1A3EA /* DigitParser.cpp */; };
@@ -49,6 +51,10 @@
 		0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTestingCollectionViewController.mm; sourceTree = "<group>"; };
 		0537E39718382C82002A3F1C /* testimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testimages.txt; sourceTree = "<group>"; };
 		0537E39818382C82002A3F1C /* testlabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testlabels.txt; sourceTree = "<group>"; };
+		0537E39B183850FB002A3F1C /* DigitDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitDetailsViewController.h; sourceTree = "<group>"; };
+		0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitDetailsViewController.mm; sourceTree = "<group>"; };
+		0537E39E18385A5C002A3F1C /* DigitDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitDetailsView.h; sourceTree = "<group>"; };
+		0537E39F18385A5C002A3F1C /* DigitDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitDetailsView.m; sourceTree = "<group>"; };
 		05459719182F034800D2223A /* trainingimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trainingimages.txt; sourceTree = "<group>"; };
 		0545971E182F050A00D2223A /* DigitTrainingCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTrainingCollectionViewController.h; sourceTree = "<group>"; };
 		0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTrainingCollectionViewController.mm; sourceTree = "<group>"; };
@@ -150,6 +156,8 @@
 			children = (
 				0537E3901838006D002A3F1C /* DigitCollectionViewCell.h */,
 				0537E3911838006D002A3F1C /* DigitCollectionViewCell.m */,
+				0537E39E18385A5C002A3F1C /* DigitDetailsView.h */,
+				0537E39F18385A5C002A3F1C /* DigitDetailsView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -161,6 +169,8 @@
 				0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */,
 				0537E39318382514002A3F1C /* DigitTestingCollectionViewController.h */,
 				0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */,
+				0537E39B183850FB002A3F1C /* DigitDetailsViewController.h */,
+				0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -343,10 +353,12 @@
 				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
 				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
 				0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */,
+				0537E39D183850FB002A3F1C /* DigitDetailsViewController.mm in Sources */,
 				0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */,
 				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
 				05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */,
 				05AB271E182F63820097D95A /* Digit.cpp in Sources */,
+				0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

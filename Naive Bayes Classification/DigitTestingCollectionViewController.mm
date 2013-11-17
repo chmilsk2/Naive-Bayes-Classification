@@ -7,6 +7,7 @@
 //
 
 #import "DigitTestingCollectionViewController.h"
+#import "DigitDetailsViewController.h"
 #import "DigitCollectionViewCell.h"
 #import "DigitSet.h"
 #import "DigitLabelParser.h"
@@ -76,6 +77,18 @@
 	NSUInteger digitCellSize = DIGIT_SIZE * DIGIT_SIZE_MULTIPLIER;
 	
 	return CGSizeMake(digitCellSize, digitCellSize);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	Digit selectedDigit = mDigitSet.digits[indexPath.row];
+	
+	DigitDetailsViewController *digitDetailsViewController = [[DigitDetailsViewController alloc] initWithDigit:selectedDigit];
+	UINavigationController *digitDetailsNavController = [[UINavigationController alloc] initWithRootViewController:digitDetailsViewController];
+	
+	[digitDetailsNavController setModalPresentationStyle:UIModalPresentationFormSheet];
+	[digitDetailsNavController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+	
+	[self presentViewController:digitDetailsNavController animated:YES completion:nil];
 }
 
 - (void)parseDigitLabels {

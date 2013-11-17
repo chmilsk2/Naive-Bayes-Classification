@@ -27,12 +27,17 @@ class DigitSet {
 		map<int, int> pixelFrequencyMapForClassIndex(int classIndex);
 		void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex);
 		void setBitShiftSizeUsingDigitSize(int digitSize);
+		void printFrequencyMap();
 	
 		vector<int> digitLabels;
 	
 		// need digit vector to display digits in the the collection view
 		vector<Digit> digits;
+	
+		// frequency map keeps track of the # of instances from each class
 		map<int, int> frequencyMap;
+	
+#warning TODO: implement access to the pixelFrequencyMaps
 		vector<map<int, int>> pixelFrequencyMaps;
 };
 

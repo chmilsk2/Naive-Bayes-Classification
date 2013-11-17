@@ -16,11 +16,13 @@ using namespace std;
 #define DIGIT_SIZE 28
 
 class Digit {
+	int mDigitClass;
 	char mPixels[DIGIT_SIZE][DIGIT_SIZE];
 	
 	public:
 		Digit();
 		~Digit();
+		int digitClass();
 		void setPixelValue(int row, int col, char value);
 		char pixelValue(int row, int col);
 		void printDigit();
