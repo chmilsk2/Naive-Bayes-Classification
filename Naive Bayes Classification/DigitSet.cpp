@@ -40,11 +40,15 @@ void DigitSet::setBitShiftSizeUsingDigitSize(int digitSize) {
 	mBitShiftSize = bitShiftSize;
 }
 
+#pragma mark - Frequency
+
 int DigitSet::frequencyForClassIndex(int classIndex) {
 	int frequency = frequencyMap[classIndex];
 	
 	return frequency;
 }
+
+#pragma mark - Pixel Frequency
 
 map<int, int> DigitSet::pixelFrequencyMapForClassIndex(int classIndex) {
 	map<int, int> pixelFrequencyMap = pixelFrequencyMaps[classIndex];
@@ -75,6 +79,18 @@ int DigitSet::pixelFrequencyForRowColumnAndClassIndex(int row, int col, int clas
 	
 	return pixelFrequency;
 }
+
+#pragma mark - Prior Probabilities
+
+void DigitSet::updatePriorProbabilityForClassIndex(int classIndex) {
+	int numberOfExamplesInTrainingSetForClass = frequencyMap[classIndex];
+	unsigned long totalNumberOfExamplesInTrainingSet = digits.size();
+	
+	double priorProbability = (double)numberOfExamplesInTrainingSetForClass/(double)totalNumberOfExamplesInTrainingSet;
+	priorProbabilityMap[classIndex] = priorProbability;
+}
+
+#pragma mark - Likelihood Probabilities
 
 void DigitSet::updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood) {
 	int pixelIndex = pixelIndexForRowAndColumn(row, col);

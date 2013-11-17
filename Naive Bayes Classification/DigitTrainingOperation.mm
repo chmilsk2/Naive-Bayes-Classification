@@ -85,6 +85,9 @@
 			}
 		}
 		
+		// compute prior probabilities P(class) = (# of examples in training set from this class)/(total # of examples in training set)
+		mDigitSet.updatePriorProbabilityForClassIndex(classIndex);
+		
 		float progress = (float)(classIndex + 1)/(float)NUMBER_OF_DIGIT_CLASSES;
 		progress = (float)progressFactor + progress/(float)progressFactor;
 		

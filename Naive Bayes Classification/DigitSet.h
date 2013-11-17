@@ -33,6 +33,9 @@ class DigitSet {
 		void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Digit digit, int classIndex);
 		int pixelFrequencyForRowColumnAndClassIndex(int row, int col, int classIndex);
 	
+		// prior probabilities
+		void updatePriorProbabilityForClassIndex(int classIndex);
+	
 		// likelihoood
 		map<int, double> likelihoodMapForClassIndex(int classIndex);
 		void updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood);
@@ -55,6 +58,9 @@ class DigitSet {
 	
 		// pixel frequency maps keeps track of the pixel frequency map for each class
 		map<int, map<int, int>> pixelFrequencyMaps;
+	
+		// prior probabilities for each class in the training set
+		map<int, double> priorProbabilityMap;
 	
 		// likelihood maps keeps track of P(Fij | class) for every pixel location (i,j) and for every digit class from 0 to 9
 		map<int, map<int, double>> likelihoodMaps;
