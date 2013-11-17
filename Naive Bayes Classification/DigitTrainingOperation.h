@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DigitTrainingOperationDelegate.h"
 #include "DigitSet.h"
 
 typedef void(^DigitTrainingOperationHandler)();
@@ -14,6 +15,7 @@ typedef void(^DigitTrainingOperationHandler)();
 @interface DigitTrainingOperation : NSOperation
 
 @property (copy) DigitTrainingOperationHandler digitTrainingOperationCompletionBlock;
+@property (nonatomic, weak) id <DigitTrainingOperationDelegate> delegate;
 
 - (id)initWithDigitSet:(DigitSet)digitSet;
 

@@ -31,6 +31,14 @@
 - (void)train {
 	cout << "training" << endl;
 	
+	if ([self.delegate respondsToSelector:@selector(showProgressView)]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.delegate showProgressView];
+		});
+	}
+	
+	unsigned long totalNumberOfDigits = mDigitSet.digits.size();
+	
 	int digitIndex = 0;
 	
 	for (vector<Digit>::iterator it = mDigitSet.digits.begin(); it != mDigitSet.digits.end(); it++) {
@@ -44,14 +52,22 @@
 		}
 		
 		digitIndex++;
+		
+		float progress = (float)digitIndex/(float)totalNumberOfDigits;
+		
+		if ([self.delegate respondsToSelector:@selector(setProgress:)]) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.delegate setProgress:progress];
+			});
+		}
 	}
-	
-	mDigitSet.printPixelFrequencyMaps();
 }
 
 - (void)didFinishTraining {
 	if (self.digitTrainingOperationCompletionBlock) {
-		self.digitTrainingOperationCompletionBlock();
+		dispatch_async(dispatch_get_main_queue(), ^{
+			self.digitTrainingOperationCompletionBlock();
+		});
 	}
 }
 

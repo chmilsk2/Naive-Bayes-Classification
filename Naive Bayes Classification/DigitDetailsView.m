@@ -12,7 +12,7 @@
 #define DIGIT_DETAILS_FONT_SIZE 36.0f
 #define DIGIT_DETAILS_VERTICAL_MARGIN 14.0f
 #define DIGIT_DETAILS_CLASSIFICATION_PREFIX_TEXT @"Class: "
-#define DIGIT_DETAILS_NO_CLASSIFICATION_TEXT @"Not yet classified"
+#define DIGIT_DETAILS_NO_CLASSIFICATION_TEXT @"Not classified"
 
 @implementation DigitDetailsView {
 	UILabel *_digitClassLabel;

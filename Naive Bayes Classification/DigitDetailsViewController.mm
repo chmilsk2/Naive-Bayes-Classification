@@ -15,7 +15,6 @@
 	Digit mDigit;
 	DigitDetailsView *_digitDetailsView;
 	UIBarButtonItem *_cancelButton;
-	UIColor *_barTintColor;
 }
 
 - (id)initWithDigit:(Digit)digit {
@@ -23,7 +22,6 @@
 	
 	if (self) {
 		mDigit = digit;
-		_barTintColor = [UIColor blackColor];
 	}
 	
 	return self;
@@ -41,7 +39,6 @@
 }
 
 - (void)setUpNavigation {
-	[self.navigationController.navigationBar setTintColor:_barTintColor];
 	[self.navigationItem setTitle:DIGIT_DETAILS_NAVIGATION_ITEM_TITLE];
 	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
 }

@@ -20,23 +20,14 @@
 #define TEST_BUTTON_TITLE @"Test"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
+#define PROGRESS_VIEW_FADE_DURATION 2.0
 #define DigitTrainingCollectionViewCellIdentifier @"DigitTrainingCollectionViewCellIdentifier"
 
 @implementation DigitTrainingCollectionViewController {
 	DigitSet mDigitSet;
+	UIProgressView *_progressView;
 	UIBarButtonItem *_trainButton;
 	UIBarButtonItem *_testButton;
-	UIColor *_barTintColor;
-}
-
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
-	self = [super initWithCollectionViewLayout:layout];
-	
-	if (self) {
-		_barTintColor = [UIColor blackColor];
-	}
-	
-	return self;
 }
 
 - (void)viewDidLoad {
@@ -44,6 +35,7 @@
 	
 	[self setUpNavigation];
 	[self setUpCollection];
+	[self setUpProgressView];
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
@@ -53,11 +45,24 @@
 - (void)setUpNavigation {
 	[self.navigationItem setTitle:DIGIT_TRAINING_NAVIGATION_ITEM_TITLE];
 	[self.navigationItem setRightBarButtonItems:@[self.testButton, self.trainButton]];
-	[self.navigationController.navigationBar setTintColor:_barTintColor];
 }
 
 - (void)setUpCollection {
 	[self.collectionView registerClass:[DigitCollectionViewCell class] forCellWithReuseIdentifier:DigitTrainingCollectionViewCellIdentifier];
+}
+
+- (void)setUpProgressView {
+	[self.navigationController.navigationBar addSubview:self.progressView];
+}
+
+- (UIProgressView *)progressView {
+	if (!_progressView) {
+		_progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+		[_progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height - _progressView.frame.size.height, self.view.frame.size.width, _progressView.frame.size.height)];
+		[_progressView setAlpha:0.0];
+	}
+	
+	return _progressView;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -137,9 +142,12 @@
 	NSLog(@"Train button touched");
 	
 	DigitTrainingOperation *digitTrainingOperation = [[DigitTrainingOperation alloc] initWithDigitSet:mDigitSet];
+	[digitTrainingOperation setDelegate:self];
 	
 	digitTrainingOperation.digitTrainingOperationCompletionBlock = ^{
 		NSLog(@"finished training");
+		
+		[self didFinishUpdatingProgressView];
 	};
 	
 	[[QueuePool sharedQueuePool].queue addOperation:digitTrainingOperation];
@@ -195,6 +203,24 @@
 	}
 	
 	return pixelColor;
+}
+
+#pragma mark - Digit Training Operation Delegate
+
+- (void)showProgressView {
+	[_progressView setAlpha:1.0];
+}
+
+- (void)setProgress:(float)progress {
+	[_progressView setProgress:progress animated:YES];
+}
+
+- (void)didFinishUpdatingProgressView {
+	[UIView animateWithDuration:PROGRESS_VIEW_FADE_DURATION animations:^{
+		_progressView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[_progressView setProgress:0.0];
+	}];
 }
 
 @end

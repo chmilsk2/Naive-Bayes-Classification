@@ -23,17 +23,6 @@
 	DigitSet mDigitSet;
 	UIBarButtonItem *_cancelButton;
 	UIBarButtonItem *_statisticsButton;
-	UIColor *_barTintColor;
-}
-
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
-	self = [super initWithCollectionViewLayout:layout];
-	
-	if (self) {
-		_barTintColor = [UIColor blackColor];
-	}
-	
-	return self;
 }
 
 - (void)viewDidLoad
@@ -48,7 +37,6 @@
 }
 
 - (void)setUpNavigation {
-	[self.navigationController.navigationBar setTintColor:_barTintColor];
 	[self.navigationItem setTitle:DIGIT_TESTING_NAVIGATION_ITEM_TITLE];
 	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
 	[self.navigationItem setRightBarButtonItem:self.statisticsButton];
