@@ -35,6 +35,14 @@
 - (void)test {
 	NSLog(@"testing");
 	
+	if ([self.delegate respondsToSelector:@selector(showProgressView)]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.delegate showProgressView];
+		});
+	}
+	
+	unsigned long totalNumberOfDigits = mTestDigitSet.digits.size();
+	
 	// in order to avoid underflow, work with logs instead
 	for (int digitIndex = 0; digitIndex < mTestDigitSet.digits.size(); digitIndex++) {
 		for (int classIndex = 0; classIndex < NUMBER_OF_DIGIT_CLASSES; classIndex++) {
@@ -88,6 +96,14 @@
 			}
 			
 			mTestDigitSet.digits[digitIndex].setDigitClass(maximumAPosterioriDigitClass);
+		}
+		
+		float progress = (float)digitIndex/(float)totalNumberOfDigits;
+		
+		if ([self.delegate respondsToSelector:@selector(setProgress:)]) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.delegate setProgress:progress];
+			});
 		}
 	}
 }

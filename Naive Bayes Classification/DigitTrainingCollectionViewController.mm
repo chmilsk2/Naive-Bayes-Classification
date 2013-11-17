@@ -20,7 +20,7 @@
 #define TEST_SET_BUTTON_TITLE @"Test Set"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
-#define PROGRESS_VIEW_FADE_DURATION 2.0
+#define DIGIT_TRAINING_PROGRESS_VIEW_FADE_DURATION 2.0
 #define DigitTrainingCollectionViewCellIdentifier @"DigitTrainingCollectionViewCellIdentifier"
 
 @implementation DigitTrainingCollectionViewController {
@@ -218,7 +218,7 @@
 }
 
 - (void)didFinishUpdatingProgressView {
-	[UIView animateWithDuration:PROGRESS_VIEW_FADE_DURATION animations:^{
+	[UIView animateWithDuration:DIGIT_TRAINING_PROGRESS_VIEW_FADE_DURATION animations:^{
 		_progressView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[_progressView setProgress:0.0];

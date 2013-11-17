@@ -15,6 +15,7 @@
 #import "DigitParser.h"
 #import "QueuePool.h"
 
+#define DIGIT_TESTING_PROGRESS_VIEW_FADE_AWAY_DURATION 2.0
 #define DIGIT_TESTING_NAVIGATION_ITEM_TITLE @"Testing"
 #define TEST_BUTTON_TITLE @"Test"
 #define STATISTICS_BUTTON_TITLE @"Statistics"
@@ -28,6 +29,7 @@
 	UIBarButtonItem *_cancelButton;
 	UIBarButtonItem *_testButton;
 	UIBarButtonItem *_statisticsButton;
+	UIProgressView *_progressView;
 }
 
 - (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout trainingDigitSet:(DigitSet)trainingDigitSet {
@@ -46,6 +48,7 @@
 	
 	[self setUpNavigation];
 	[self setUpCollection];
+	[self setUpProgressView];
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
@@ -65,6 +68,20 @@
 	NSInteger numberOfDigits = mTestingDigitSet.digits.size();
 	
 	return numberOfDigits;
+}
+
+- (void)setUpProgressView {
+	[self.navigationController.navigationBar addSubview:self.progressView];
+}
+
+- (UIProgressView *)progressView {
+	if (!_progressView) {
+		_progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+		[_progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height - _progressView.frame.size.height, self.view.frame.size.width, _progressView.frame.size.height)];
+		[_progressView setAlpha:0.0];
+	}
+	
+	return _progressView;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,6 +161,7 @@
 	NSLog(@"Test button touched");
 	
 	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet];
+	[digitTestingOperation setDelegate:self];
 	
 	digitTestingOperation.digitTestingOperationCompletionBlock = ^(DigitSet testedDigitSet) {
 		NSLog(@"finished testing");
@@ -151,6 +169,8 @@
 		mTestingDigitSet = testedDigitSet;
 		
 		[self.collectionView reloadData];
+		
+		[self didFinishUpdatingProgressView];
 	};
 	
 	[[QueuePool sharedQueuePool].queue addOperation:digitTestingOperation];
@@ -205,6 +225,24 @@
 	}
 	
 	return pixelColor;
+}
+
+#pragma mark - Digit Training Operation Delegate
+
+- (void)showProgressView {
+	[_progressView setAlpha:1.0];
+}
+
+- (void)setProgress:(float)progress {
+	[_progressView setProgress:progress animated:YES];
+}
+
+- (void)didFinishUpdatingProgressView {
+	[UIView animateWithDuration:DIGIT_TESTING_PROGRESS_VIEW_FADE_AWAY_DURATION animations:^{
+		_progressView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[_progressView setProgress:0.0];
+	}];
 }
 
 - (void)didReceiveMemoryWarning
