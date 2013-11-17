@@ -160,10 +160,10 @@
 				0537E3A11838A8DC002A3F1C /* QueuePool.h */,
 				0537E3A21838A8DC002A3F1C /* QueuePool.m */,
 				0537E3A41838A9D1002A3F1C /* DigitTrainingOperation.h */,
-				057C9BE71839381F00458D8A /* DigitOperationDelegate.h */,
 				0537E3A51838A9D1002A3F1C /* DigitTrainingOperation.mm */,
 				057C9BE918393F4000458D8A /* DigitTestingOperation.h */,
 				057C9BEA18393F4000458D8A /* DigitTestingOperation.m */,
+				057C9BE71839381F00458D8A /* DigitOperationDelegate.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";

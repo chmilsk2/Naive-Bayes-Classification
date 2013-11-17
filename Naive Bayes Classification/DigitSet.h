@@ -24,11 +24,26 @@ class DigitSet {
 		~DigitSet();
 	
 		Digit digitForRowAndColumn(int row, int col);
+	
+		// class frequency
+		int frequencyForClassIndex(int classIndex);
+	
+		// pixel frequency
 		map<int, int> pixelFrequencyMapForClassIndex(int classIndex);
 		void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Digit digit, int classIndex);
+		int pixelFrequencyForRowColumnAndClassIndex(int row, int col, int classIndex);
+	
+		// likelihoood
+		map<int, double> likelihoodMapForClassIndex(int classIndex);
+		void updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood);
+	
+		// bit shift size
 		void setBitShiftSizeUsingDigitSize(int digitSize);
+	
+		// logging
 		void printFrequencyMap();
 		void printPixelFrequencyMaps();
+		void printLikelihoodMaps();
 	
 		vector<int> digitLabels;
 	
@@ -38,8 +53,11 @@ class DigitSet {
 		// frequency map keeps track of the # of instances from each class
 		map<int, int> frequencyMap;
 	
-		// pixel frequency maps keeps track of the pixel frequency map for each track
+		// pixel frequency maps keeps track of the pixel frequency map for each class
 		map<int, map<int, int>> pixelFrequencyMaps;
+	
+		// likelihood maps keeps track of P(Fij | class) for every pixel location (i,j) and for every digit class from 0 to 9
+		map<int, map<int, double>> likelihoodMaps;
 	
 	private:
 		int pixelIndexForRowAndColumn(int row, int col);

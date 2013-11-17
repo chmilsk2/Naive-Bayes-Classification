@@ -40,6 +40,12 @@ void DigitSet::setBitShiftSizeUsingDigitSize(int digitSize) {
 	mBitShiftSize = bitShiftSize;
 }
 
+int DigitSet::frequencyForClassIndex(int classIndex) {
+	int frequency = frequencyMap[classIndex];
+	
+	return frequency;
+}
+
 map<int, int> DigitSet::pixelFrequencyMapForClassIndex(int classIndex) {
 	map<int, int> pixelFrequencyMap = pixelFrequencyMaps[classIndex];
 	
@@ -58,6 +64,26 @@ void DigitSet::updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, in
 	if (pixelValue == '+' || pixelValue == '#') {
 		pixelFrequencyMaps[classIndex][pixelIndex]++;
 	}
+}
+
+int DigitSet::pixelFrequencyForRowColumnAndClassIndex(int row, int col, int classIndex) {
+	int pixelFrequency = 0;
+	
+	int pixelIndex = pixelIndexForRowAndColumn(row, col);
+	
+	pixelFrequency = pixelFrequencyMaps[classIndex][pixelIndex];
+	
+	return pixelFrequency;
+}
+
+void DigitSet::updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood) {
+	int pixelIndex = pixelIndexForRowAndColumn(row, col);
+	
+	if (likelihoodMaps[classIndex].find(pixelIndex) == likelihoodMaps[classIndex].end()) {
+		likelihoodMaps[classIndex][pixelIndex] = 0;
+	}
+	
+	likelihoodMaps[classIndex][pixelIndex] = likelihood;
 }
 
 int DigitSet::pixelIndexForRowAndColumn(int row, int col) {
@@ -85,6 +111,16 @@ void DigitSet::printPixelFrequencyMaps() {
 		for (map<int, int>::iterator pixelFrequencyMapIterator = pixelFrequencyMap.begin(); pixelFrequencyMapIterator != pixelFrequencyMap.end();
 			 pixelFrequencyMapIterator++) {
 			cout << pixelFrequencyMapsIterator->first << ": " << pixelFrequencyMapIterator->first << ": " << pixelFrequencyMapIterator->second << endl;
+		}
+	}
+}
+
+void DigitSet::printLikelihoodMaps() {
+	for (map<int, map<int, double>>::iterator likelihoodMapsIterator = likelihoodMaps.begin(); likelihoodMapsIterator != likelihoodMaps.end(); likelihoodMapsIterator++) {
+		map<int, double> likelihoodMap = likelihoodMapsIterator->second;
+		
+		for (map<int, double>::iterator likelihoodMapIterator = likelihoodMap.begin(); likelihoodMapIterator != likelihoodMap.end(); likelihoodMapIterator++) {
+			cout << likelihoodMapsIterator->first << ": " << likelihoodMapIterator->first << ": " << likelihoodMapIterator->second << endl;
 		}
 	}
 }
