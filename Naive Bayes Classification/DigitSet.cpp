@@ -49,13 +49,13 @@ map<int, int> DigitSet::pixelFrequencyMapForClassIndex(int classIndex) {
 void DigitSet::updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Digit digit, int classIndex) {
 	char pixelValue = digit.pixelValue(row, col);
 	
+	int pixelIndex = pixelIndexForRowAndColumn(row, col);
+	
+	if (pixelFrequencyMaps[classIndex].find(pixelIndex) == pixelFrequencyMaps[classIndex].end()) {
+		pixelFrequencyMaps[classIndex][pixelIndex] = 0;
+	}
+	
 	if (pixelValue == '+' || pixelValue == '#') {
-		int pixelIndex = pixelIndexForRowAndColumn(row, col);
-		
-		if (pixelFrequencyMaps[classIndex].find(pixelIndex) == pixelFrequencyMaps[classIndex].end()) {
-			pixelFrequencyMaps[classIndex][pixelIndex] = 0;
-		}
-		
 		pixelFrequencyMaps[classIndex][pixelIndex]++;
 	}
 }
