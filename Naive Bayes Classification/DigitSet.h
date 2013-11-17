@@ -25,9 +25,10 @@ class DigitSet {
 	
 		Digit digitForRowAndColumn(int row, int col);
 		map<int, int> pixelFrequencyMapForClassIndex(int classIndex);
-		void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex);
+		void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Digit digit, int classIndex);
 		void setBitShiftSizeUsingDigitSize(int digitSize);
 		void printFrequencyMap();
+		void printPixelFrequencyMaps();
 	
 		vector<int> digitLabels;
 	
@@ -37,8 +38,11 @@ class DigitSet {
 		// frequency map keeps track of the # of instances from each class
 		map<int, int> frequencyMap;
 	
-#warning TODO: implement access to the pixelFrequencyMaps
-		vector<map<int, int>> pixelFrequencyMaps;
+		// pixel frequency maps keeps track of the pixel frequency map for each track
+		map<int, map<int, int>> pixelFrequencyMaps;
+	
+	private:
+		int pixelIndexForRowAndColumn(int row, int col);
 };
 
 #endif /* defined(__Naive_Bayes_Classification__DigitSet__) */

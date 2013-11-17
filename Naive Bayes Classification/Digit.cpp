@@ -7,6 +7,9 @@
 //
 
 #include "Digit.h"
+#include <math.h>
+
+using namespace std;
 
 Digit::Digit() {
 	// -1 means the digit class has not yet been classified
@@ -17,6 +20,10 @@ Digit::~Digit() {}
 
 int Digit::digitClass() {
 	return mDigitClass;
+}
+
+void Digit::setDigitClass(int digitClass) {
+	mDigitClass = digitClass;
 }
 
 void Digit::setPixelValue(int row, int col, char value) {
@@ -37,4 +44,3 @@ void Digit::printDigit() {
 		cout << endl;
 	}
 }
-

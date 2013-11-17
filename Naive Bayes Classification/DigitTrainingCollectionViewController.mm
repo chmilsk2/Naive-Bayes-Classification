@@ -9,9 +9,11 @@
 #import "DigitTrainingCollectionViewController.h"
 #import "DigitTestingCollectionViewController.h"
 #import "DigitDetailsViewController.h"
+#import "DigitTrainingOperation.h"
 #import "DigitParser.h"
 #import "DigitLabelParser.h"
 #import "DigitSet.h"
+#import "QueuePool.h"
 
 #define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
 #define TRAIN_BUTTON_TITLE @"Train"
@@ -45,6 +47,7 @@
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
+	[self setUpDigits];
 }
 
 - (void)setUpNavigation {
@@ -108,6 +111,16 @@
 	digitParser.parseDigits(mDigitSet);
 }
 
+- (void)setUpDigits {
+	int digitIndex = 0;
+	
+	for (vector<Digit>::iterator it = mDigitSet.digits.begin(); it != mDigitSet.digits.end(); it++) {
+		it->setDigitClass(mDigitSet.digitLabels[digitIndex]);
+		
+		digitIndex++;
+	}
+}
+
 #pragma mark - Train Button
 
 - (UIBarButtonItem *)trainButton {
@@ -122,6 +135,14 @@
 
 - (void)trainButtonTouched {
 	NSLog(@"Train button touched");
+	
+	DigitTrainingOperation *digitTrainingOperation = [[DigitTrainingOperation alloc] initWithDigitSet:mDigitSet];
+	
+	digitTrainingOperation.digitTrainingOperationCompletionBlock = ^{
+		NSLog(@"finished training");
+	};
+	
+	[[QueuePool sharedQueuePool].queue addOperation:digitTrainingOperation];
 }
 
 #pragma mark - Test Button

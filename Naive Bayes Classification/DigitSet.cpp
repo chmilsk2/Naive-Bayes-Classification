@@ -9,6 +9,7 @@
 #include "DigitSet.h"
 #include <math.h>
 
+#pragma mark - Public Functions
 
 DigitSet::DigitSet() {}
 
@@ -45,12 +46,24 @@ map<int, int> DigitSet::pixelFrequencyMapForClassIndex(int classIndex) {
 	return pixelFrequencyMap;
 }
 
-void DigitSet::updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex) {
-	map<int, int> pixelFrequencyMap = pixelFrequencyMaps[classIndex];
-	int pixelIndex = (row << mBitShiftSize) + col;
-	pixelFrequencyMap[pixelIndex]++;
+void DigitSet::updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Digit digit, int classIndex) {
+	char pixelValue = digit.pixelValue(row, col);
 	
-	// pixelFrequencyMaps[classIndex] = pixelFrequencyMap;
+	if (pixelValue == '+' || pixelValue == '#') {
+		int pixelIndex = pixelIndexForRowAndColumn(row, col);
+		
+		if (pixelFrequencyMaps[classIndex].find(pixelIndex) == pixelFrequencyMaps[classIndex].end()) {
+			pixelFrequencyMaps[classIndex][pixelIndex] = 0;
+		}
+		
+		pixelFrequencyMaps[classIndex][pixelIndex]++;
+	}
+}
+
+int DigitSet::pixelIndexForRowAndColumn(int row, int col) {
+	int pixelIndex = (row << mBitShiftSize) + col;
+	
+	return pixelIndex;
 }
 
 void DigitSet::printFrequencyMap() {
@@ -63,4 +76,15 @@ void DigitSet::printFrequencyMap() {
 	}
 	
 	cout << "total: " << total << endl;
+}
+
+void DigitSet::printPixelFrequencyMaps() {
+	for (map<int, map<int, int>>::iterator pixelFrequencyMapsIterator = pixelFrequencyMaps.begin(); pixelFrequencyMapsIterator != pixelFrequencyMaps.end(); pixelFrequencyMapsIterator++) {
+		map<int, int> pixelFrequencyMap = pixelFrequencyMapsIterator->second;
+		
+		for (map<int, int>::iterator pixelFrequencyMapIterator = pixelFrequencyMap.begin(); pixelFrequencyMapIterator != pixelFrequencyMap.end();
+			 pixelFrequencyMapIterator++) {
+			cout << pixelFrequencyMapsIterator->first << ": " << pixelFrequencyMapIterator->first << ": " << pixelFrequencyMapIterator->second << endl;
+		}
+	}
 }

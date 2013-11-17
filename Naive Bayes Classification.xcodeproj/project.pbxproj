@@ -13,6 +13,8 @@
 		0537E39A18382C82002A3F1C /* testlabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39818382C82002A3F1C /* testlabels.txt */; };
 		0537E39D183850FB002A3F1C /* DigitDetailsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */; };
 		0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39F18385A5C002A3F1C /* DigitDetailsView.m */; };
+		0537E3A31838A8DC002A3F1C /* QueuePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3A21838A8DC002A3F1C /* QueuePool.m */; };
+		0537E3A61838A9D1002A3F1C /* DigitTrainingOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3A51838A9D1002A3F1C /* DigitTrainingOperation.mm */; };
 		0545971A182F034800D2223A /* trainingimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05459719182F034800D2223A /* trainingimages.txt */; };
 		05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */; };
 		056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 056761F6182F14D700C1A3EA /* DigitParser.cpp */; };
@@ -55,6 +57,10 @@
 		0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitDetailsViewController.mm; sourceTree = "<group>"; };
 		0537E39E18385A5C002A3F1C /* DigitDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitDetailsView.h; sourceTree = "<group>"; };
 		0537E39F18385A5C002A3F1C /* DigitDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitDetailsView.m; sourceTree = "<group>"; };
+		0537E3A11838A8DC002A3F1C /* QueuePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueuePool.h; sourceTree = "<group>"; };
+		0537E3A21838A8DC002A3F1C /* QueuePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueuePool.m; sourceTree = "<group>"; };
+		0537E3A41838A9D1002A3F1C /* DigitTrainingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTrainingOperation.h; sourceTree = "<group>"; };
+		0537E3A51838A9D1002A3F1C /* DigitTrainingOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTrainingOperation.mm; sourceTree = "<group>"; };
 		05459719182F034800D2223A /* trainingimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trainingimages.txt; sourceTree = "<group>"; };
 		0545971E182F050A00D2223A /* DigitTrainingCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTrainingCollectionViewController.h; sourceTree = "<group>"; };
 		0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTrainingCollectionViewController.mm; sourceTree = "<group>"; };
@@ -147,6 +153,10 @@
 				05AB2719182F4D7D0097D95A /* DigitSet.cpp */,
 				05AB271D182F63820097D95A /* Digit.h */,
 				05AB271C182F63820097D95A /* Digit.cpp */,
+				0537E3A11838A8DC002A3F1C /* QueuePool.h */,
+				0537E3A21838A8DC002A3F1C /* QueuePool.m */,
+				0537E3A41838A9D1002A3F1C /* DigitTrainingOperation.h */,
+				0537E3A51838A9D1002A3F1C /* DigitTrainingOperation.mm */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -349,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05ABC00D182EF0AF00116729 /* AppDelegate.m in Sources */,
+				0537E3A31838A8DC002A3F1C /* QueuePool.m in Sources */,
 				05ABC009182EF0AF00116729 /* main.m in Sources */,
 				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
 				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
@@ -359,6 +370,7 @@
 				05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */,
 				05AB271E182F63820097D95A /* Digit.cpp in Sources */,
 				0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */,
+				0537E3A61838A9D1002A3F1C /* DigitTrainingOperation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

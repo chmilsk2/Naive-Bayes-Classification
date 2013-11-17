@@ -11,8 +11,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 #define DIGIT_SIZE 28
 
 class Digit {
@@ -23,8 +21,9 @@ class Digit {
 		Digit();
 		~Digit();
 		int digitClass();
-		void setPixelValue(int row, int col, char value);
+		void setDigitClass(int digitClass);
 		char pixelValue(int row, int col);
+		void setPixelValue(int row, int col, char value);
 		void printDigit();
 };
 

@@ -1,3 +1,4 @@
+
 //
 //  DigitParser.cpp
 //  Naive Bayes Classification
@@ -9,6 +10,8 @@
 #include "DigitParser.h"
 #include "Digit.h"
 #include <fstream>
+
+using namespace std;
 
 DigitParser::DigitParser(const char * filePath):mFilePath(filePath) {}
 
