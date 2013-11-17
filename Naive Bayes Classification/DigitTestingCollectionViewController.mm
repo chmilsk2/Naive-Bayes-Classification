@@ -8,12 +8,15 @@
 
 #import "DigitTestingCollectionViewController.h"
 #import "DigitDetailsViewController.h"
+#import "DigitTestingOperation.h"
 #import "DigitCollectionViewCell.h"
 #import "DigitSet.h"
 #import "DigitLabelParser.h"
 #import "DigitParser.h"
+#import "QueuePool.h"
 
 #define DIGIT_TESTING_NAVIGATION_ITEM_TITLE @"Testing"
+#define TEST_BUTTON_TITLE @"Test"
 #define STATISTICS_BUTTON_TITLE @"Statistics"
 #define DigitTestingCollectionViewCellIdentifier @"DigitTestingCollectionViewCellIdentifier"
 #define TESTING_LABELS_TEXT_NAME @"testlabels"
@@ -22,6 +25,7 @@
 @implementation DigitTestingCollectionViewController {
 	DigitSet mDigitSet;
 	UIBarButtonItem *_cancelButton;
+	UIBarButtonItem *_testButton;
 	UIBarButtonItem *_statisticsButton;
 }
 
@@ -39,7 +43,7 @@
 - (void)setUpNavigation {
 	[self.navigationItem setTitle:DIGIT_TESTING_NAVIGATION_ITEM_TITLE];
 	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
-	[self.navigationItem setRightBarButtonItem:self.statisticsButton];
+	[self.navigationItem setRightBarButtonItems:@[self.statisticsButton, self.testButton] animated:YES];
 }
 
 - (void)setUpCollection {
@@ -111,6 +115,30 @@
 
 - (void)cancelButtonTouched {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Test Button 
+
+- (UIBarButtonItem *)testButton {
+	if (!_testButton) {
+		_testButton = [[UIBarButtonItem alloc] initWithTitle:TEST_BUTTON_TITLE style:UIBarButtonItemStylePlain target:self action:@selector(testButtonTouched)];
+	}
+	
+	return _testButton;
+}
+
+#pragma mark - Test Button Touched 
+
+- (void)testButtonTouched {
+	NSLog(@"Test button touched");
+	
+	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] init];
+	
+	digitTestingOperation.digitTestingOperationCompletionBlock = ^{
+		NSLog(@"finished testing");
+	};
+	
+	[[QueuePool sharedQueuePool].queue addOperation:digitTestingOperation];
 }
 
 #pragma mark - Statistics Button

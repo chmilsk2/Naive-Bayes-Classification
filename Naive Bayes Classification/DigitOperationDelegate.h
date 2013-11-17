@@ -1,5 +1,5 @@
 //
-//  DigitTrainingOperationDelegate.h
+//  DigitOperationDelegate.h
 //  Naive Bayes Classification
 //
 //  Created by Troy Chmieleski on 11/17/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DigitTrainingOperationDelegate <NSObject>
+@protocol DigitOperationDelegate <NSObject>
 
 - (void)showProgressView;
 - (void)setProgress:(float)progress;

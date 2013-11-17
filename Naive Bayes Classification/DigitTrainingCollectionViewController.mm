@@ -17,7 +17,7 @@
 
 #define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
 #define TRAIN_BUTTON_TITLE @"Train"
-#define TEST_BUTTON_TITLE @"Test"
+#define TEST_SET_BUTTON_TITLE @"Test Set"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
 #define PROGRESS_VIEW_FADE_DURATION 2.0
@@ -27,7 +27,7 @@
 	DigitSet mDigitSet;
 	UIProgressView *_progressView;
 	UIBarButtonItem *_trainButton;
-	UIBarButtonItem *_testButton;
+	UIBarButtonItem *_testSetButton;
 }
 
 - (void)viewDidLoad {
@@ -44,7 +44,7 @@
 
 - (void)setUpNavigation {
 	[self.navigationItem setTitle:DIGIT_TRAINING_NAVIGATION_ITEM_TITLE];
-	[self.navigationItem setRightBarButtonItems:@[self.testButton, self.trainButton]];
+	[self.navigationItem setRightBarButtonItems:@[self.testSetButton, self.trainButton]];
 }
 
 - (void)setUpCollection {
@@ -155,17 +155,17 @@
 
 #pragma mark - Test Button
 
-- (UIBarButtonItem *)testButton {
-	if (!_testButton) {
-		_testButton = [[UIBarButtonItem alloc] initWithTitle:TEST_BUTTON_TITLE style:UIBarButtonItemStylePlain target:self action:@selector(testButtonTouched)];
+- (UIBarButtonItem *)testSetButton {
+	if (!_testSetButton) {
+		_testSetButton = [[UIBarButtonItem alloc] initWithTitle:TEST_SET_BUTTON_TITLE style:UIBarButtonItemStylePlain target:self action:@selector(testSetButtonTouched)];
 	}
 	
-	return _testButton;
+	return _testSetButton;
 }
 
-#pragma mark - Test Button Touched
+#pragma mark - Test Set Button Touched
 
-- (void)testButtonTouched {
+- (void)testSetButtonTouched {
 	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
 	DigitTestingCollectionViewController *digitTestingCollectionViewController = [[DigitTestingCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitTestingCollectionViewController];

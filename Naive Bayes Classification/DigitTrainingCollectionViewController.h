@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DigitTrainingOperationDelegate.h"
+#import "DigitOperationDelegate.h"
 #import "DigitCollectionViewCell.h"
 
-@interface DigitTrainingCollectionViewController : UICollectionViewController <DigitCollectionViewDataSource, DigitCollectionViewDelegate, DigitTrainingOperationDelegate>
+@interface DigitTrainingCollectionViewController : UICollectionViewController <DigitCollectionViewDataSource, DigitCollectionViewDelegate, DigitOperationDelegate>
 
 @end
