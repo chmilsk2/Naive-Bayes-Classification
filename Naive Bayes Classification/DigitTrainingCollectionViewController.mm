@@ -144,8 +144,10 @@
 	DigitTrainingOperation *digitTrainingOperation = [[DigitTrainingOperation alloc] initWithDigitSet:mDigitSet];
 	[digitTrainingOperation setDelegate:self];
 	
-	digitTrainingOperation.digitTrainingOperationCompletionBlock = ^{
+	digitTrainingOperation.digitTrainingOperationCompletionBlock = ^(DigitSet trainedDigitSet) {
 		NSLog(@"finished training");
+		
+		mDigitSet = trainedDigitSet;
 		
 		[self didFinishUpdatingProgressView];
 	};
@@ -167,7 +169,7 @@
 
 - (void)testSetButtonTouched {
 	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-	DigitTestingCollectionViewController *digitTestingCollectionViewController = [[DigitTestingCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+	DigitTestingCollectionViewController *digitTestingCollectionViewController = [[DigitTestingCollectionViewController alloc] initWithCollectionViewLayout:flowLayout trainingDigitSet:mDigitSet];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitTestingCollectionViewController];
 	
 	[self presentViewController:navController animated:YES completion:nil];

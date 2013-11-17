@@ -102,6 +102,16 @@ void DigitSet::updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int co
 	likelihoodMaps[classIndex][pixelIndex] = likelihood;
 }
 
+double DigitSet::likelihoodForRowColumnAndClassIndex(int row, int col, int classIndex) {
+	int pixelIndex = pixelIndexForRowAndColumn(row, col);
+	
+	double likelihood = likelihoodMaps[classIndex][pixelIndex];
+	
+	return likelihood;
+}
+
+#pragma mark - Pixel Index
+
 int DigitSet::pixelIndexForRowAndColumn(int row, int col) {
 	int pixelIndex = (row << mBitShiftSize) + col;
 	
@@ -138,5 +148,17 @@ void DigitSet::printLikelihoodMaps() {
 		for (map<int, double>::iterator likelihoodMapIterator = likelihoodMap.begin(); likelihoodMapIterator != likelihoodMap.end(); likelihoodMapIterator++) {
 			cout << likelihoodMapsIterator->first << ": " << likelihoodMapIterator->first << ": " << likelihoodMapIterator->second << endl;
 		}
+	}
+}
+
+void DigitSet::printMaximumAPosterioriMap() {
+	for (map<int, double>::iterator it = maximumAPosterioriMap.begin(); it != maximumAPosterioriMap.end(); it++) {
+		cout << it->first << ": " << it->second << endl;
+	}
+}
+
+void DigitSet::printMaximumLikelihoodMap() {
+	for (map<int, double>::iterator it = maximumLikelihoodMap.begin(); it != maximumLikelihoodMap.end(); it++) {
+		cout << it->first << ": " << it->second;
 	}
 }

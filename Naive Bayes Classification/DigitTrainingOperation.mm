@@ -8,7 +8,7 @@
 
 #import "DigitTrainingOperation.h"
 
-#define SMOOTHING_CONSTANT 1
+#define SMOOTHING_CONSTANT 50
 #define NUMBER_OF_POSSIBLE_VALUES_PER_FEATURE 2
 
 
@@ -97,8 +97,6 @@
 			});
 		}
 	}
-	
-	mDigitSet.printLikelihoodMaps();
 }
 
 #pragma mark - Likelihood without Smoothing
@@ -126,7 +124,7 @@
 - (void)didFinishTraining {
 	if (self.digitTrainingOperationCompletionBlock) {
 		dispatch_async(dispatch_get_main_queue(), ^{
-			self.digitTrainingOperationCompletionBlock();
+			self.digitTrainingOperationCompletionBlock(mDigitSet);
 		});
 	}
 }

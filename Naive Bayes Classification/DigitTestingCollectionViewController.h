@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DigitSet.h"
 #import "DigitCollectionViewCell.h"
 
 @interface DigitTestingCollectionViewController : UICollectionViewController <DigitCollectionViewDataSource, DigitCollectionViewDelegate>
+
+- (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout trainingDigitSet:(DigitSet)trainingDigitSet;
 
 @end

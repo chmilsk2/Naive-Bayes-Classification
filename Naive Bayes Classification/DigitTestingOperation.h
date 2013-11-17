@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DigitOperationDelegate.h"
+#include "DigitSet.h"
 
-typedef void(^DigitTestingOperationHandler)();
+typedef void(^DigitTestingOperationHandler)(DigitSet testedDigitSet);
 
 @interface DigitTestingOperation : NSOperation
 
 @property (copy) DigitTestingOperationHandler digitTestingOperationCompletionBlock;
 @property (nonatomic, weak) id <DigitOperationDelegate> delegate;
+
+- (id)initWithTestDigitSet:(DigitSet)testDigitSet trainingDigitSet:(DigitSet)trainingDigitSet;
 
 @end

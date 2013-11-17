@@ -39,6 +39,7 @@ class DigitSet {
 		// likelihoood
 		map<int, double> likelihoodMapForClassIndex(int classIndex);
 		void updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood);
+		double likelihoodForRowColumnAndClassIndex(int row, int col, int classIndex);
 	
 		// bit shift size
 		void setBitShiftSizeUsingDigitSize(int digitSize);
@@ -47,6 +48,8 @@ class DigitSet {
 		void printFrequencyMap();
 		void printPixelFrequencyMaps();
 		void printLikelihoodMaps();
+		void printMaximumAPosterioriMap();
+		void printMaximumLikelihoodMap();
 	
 		vector<int> digitLabels;
 	
@@ -64,6 +67,12 @@ class DigitSet {
 	
 		// likelihood maps keeps track of P(Fij | class) for every pixel location (i,j) and for every digit class from 0 to 9
 		map<int, map<int, double>> likelihoodMaps;
+	
+		// MAP classification
+		map<int, double> maximumAPosterioriMap;
+	
+		// ML classification
+		map<int, double> maximumLikelihoodMap;
 	
 	private:
 		int pixelIndexForRowAndColumn(int row, int col);

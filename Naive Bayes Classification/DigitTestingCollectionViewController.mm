@@ -23,10 +23,21 @@
 #define TESTING_IMAGES_TEXT_NAME @"testimages"
 
 @implementation DigitTestingCollectionViewController {
-	DigitSet mDigitSet;
+	DigitSet mTrainingDigitSet;
+	DigitSet mTestingDigitSet;
 	UIBarButtonItem *_cancelButton;
 	UIBarButtonItem *_testButton;
 	UIBarButtonItem *_statisticsButton;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout trainingDigitSet:(DigitSet)trainingDigitSet {
+	self = [super initWithCollectionViewLayout:flowLayout];
+	
+	if (self) {
+		mTrainingDigitSet = trainingDigitSet;
+	}
+	
+	return self;
 }
 
 - (void)viewDidLoad
@@ -51,7 +62,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	NSInteger numberOfDigits = mDigitSet.digits.size();
+	NSInteger numberOfDigits = mTestingDigitSet.digits.size();
 	
 	return numberOfDigits;
 }
@@ -74,7 +85,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	Digit selectedDigit = mDigitSet.digits[indexPath.row];
+	Digit selectedDigit = mTestingDigitSet.digits[indexPath.row];
 	
 	DigitDetailsViewController *digitDetailsViewController = [[DigitDetailsViewController alloc] initWithDigit:selectedDigit];
 	UINavigationController *digitDetailsNavController = [[UINavigationController alloc] initWithRootViewController:digitDetailsViewController];
@@ -88,17 +99,17 @@
 - (void)parseDigitLabels {
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:TESTING_LABELS_TEXT_NAME ofType:@"txt"];
 	DigitLabelParser digitLabelParser([filePath fileSystemRepresentation]);
-	mDigitSet = digitLabelParser.parseDigitLabels();
+	mTestingDigitSet = digitLabelParser.parseDigitLabels();
 }
 
 - (void)setUpDigitSet {
-	mDigitSet.setBitShiftSizeUsingDigitSize(DIGIT_SIZE);
+	mTestingDigitSet.setBitShiftSizeUsingDigitSize(DIGIT_SIZE);
 }
 
 - (void)parseDigits {
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:TESTING_IMAGES_TEXT_NAME ofType:@"txt"];
 	DigitParser digitParser([filePath fileSystemRepresentation]);
-	digitParser.parseDigits(mDigitSet);
+	digitParser.parseDigits(mTestingDigitSet);
 }
 
 #pragma mark - Cancel Button
@@ -132,10 +143,14 @@
 - (void)testButtonTouched {
 	NSLog(@"Test button touched");
 	
-	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] init];
+	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet];
 	
-	digitTestingOperation.digitTestingOperationCompletionBlock = ^{
+	digitTestingOperation.digitTestingOperationCompletionBlock = ^(DigitSet testedDigitSet) {
 		NSLog(@"finished testing");
+		
+		mTestingDigitSet = testedDigitSet;
+		
+		[self.collectionView reloadData];
 	};
 	
 	[[QueuePool sharedQueuePool].queue addOperation:digitTestingOperation];
@@ -173,7 +188,7 @@
 	
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:digitCollectionViewCell];
 	
-	Digit digit = mDigitSet.digits[indexPath.row];
+	Digit digit = mTestingDigitSet.digits[indexPath.row];
 	
 	char pixelChar = digit.pixelValue((int)row, (int)col);
 	

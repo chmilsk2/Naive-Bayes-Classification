@@ -10,7 +10,7 @@
 #import "DigitOperationDelegate.h"
 #include "DigitSet.h"
 
-typedef void(^DigitTrainingOperationHandler)();
+typedef void(^DigitTrainingOperationHandler)(DigitSet trainedDigitSet);
 
 @interface DigitTrainingOperation : NSOperation
 
