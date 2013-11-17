@@ -9,6 +9,8 @@
 #import "DigitDetailsViewController.h"
 #import "DigitDetailsView.h"
 
+#define DIGIT_DETAILS_NAVIGATION_ITEM_TITLE @"Details"
+
 @implementation DigitDetailsViewController {
 	Digit mDigit;
 	DigitDetailsView *_digitDetailsView;
@@ -39,8 +41,9 @@
 }
 
 - (void)setUpNavigation {
-	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
 	[self.navigationController.navigationBar setTintColor:_barTintColor];
+	[self.navigationItem setTitle:DIGIT_DETAILS_NAVIGATION_ITEM_TITLE];
+	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
 }
 
 - (DigitDetailsView *)digitDetailsView {
@@ -74,8 +77,8 @@
 
 #pragma mark - Digit Details View Delegate
 
-- (NSUInteger)navigationBarHeight {
-	NSUInteger navBarHeight = self.navigationController.navigationBar.frame.size.height;
+- (CGFloat)navigationBarHeight {
+	CGFloat navBarHeight = self.navigationController.navigationBar.frame.size.height;
 	
 	return navBarHeight;
 }

@@ -45,8 +45,6 @@
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
-	
-	NSLog(@"%@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void)setUpNavigation {

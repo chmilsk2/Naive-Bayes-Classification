@@ -13,6 +13,7 @@
 #import "DigitLabelParser.h"
 #import "DigitParser.h"
 
+#define DIGIT_TESTING_NAVIGATION_ITEM_TITLE @"Testing"
 #define STATISTICS_BUTTON_TITLE @"Statistics"
 #define DigitTestingCollectionViewCellIdentifier @"DigitTestingCollectionViewCellIdentifier"
 #define TESTING_LABELS_TEXT_NAME @"testlabels"
@@ -48,6 +49,7 @@
 
 - (void)setUpNavigation {
 	[self.navigationController.navigationBar setTintColor:_barTintColor];
+	[self.navigationItem setTitle:DIGIT_TESTING_NAVIGATION_ITEM_TITLE];
 	[self.navigationItem setLeftBarButtonItem:self.cancelButton];
 	[self.navigationItem setRightBarButtonItem:self.statisticsButton];
 }

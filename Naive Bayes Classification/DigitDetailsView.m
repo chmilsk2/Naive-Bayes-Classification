@@ -64,10 +64,6 @@
 }
 
 - (void)layoutSubviews {
-	// set digit frame
-	
-	NSLog(@"%@", NSStringFromCGRect(self.frame));
-	
 	// set digit label frame
 	[_digitClassLabel setFrame:CGRectMake(0, self.frame.size.height - _font.pointSize - DIGIT_DETAILS_VERTICAL_MARGIN, self.frame.size.width, _font.pointSize)];
 }
