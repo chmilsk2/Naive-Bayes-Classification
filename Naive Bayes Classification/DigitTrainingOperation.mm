@@ -8,7 +8,7 @@
 
 #import "DigitTrainingOperation.h"
 
-#define SMOOTHING_CONSTANT 50
+#define SMOOTHING_CONSTANT 1
 #define NUMBER_OF_POSSIBLE_VALUES_PER_FEATURE 2
 
 

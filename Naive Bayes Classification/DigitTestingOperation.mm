@@ -13,6 +13,7 @@
 @implementation DigitTestingOperation {
 	DigitSet mTrainingDigitSet;
 	DigitSet mTestDigitSet;
+	ClassificationRule _classificationRule;
 }
 
 - (void)main {
@@ -21,12 +22,13 @@
 	[self didFinishTesting];
 }
 
-- (id)initWithTestDigitSet:(DigitSet)testDigitSet trainingDigitSet:(DigitSet)trainingDigitSet {
+- (id)initWithTestDigitSet:(DigitSet)testDigitSet trainingDigitSet:(DigitSet)trainingDigitSet classificationRule:(ClassificationRule)classificationRule {
 	self = [super init];
 	
 	if (self) {
 		mTrainingDigitSet = trainingDigitSet;
 		mTestDigitSet = testDigitSet;
+		_classificationRule = classificationRule;
 	}
 	
 	return self;
@@ -50,11 +52,14 @@
 			double logOfPriorProbability = log10(priorProbability);
 			
 			// MAP
-			mTestDigitSet.maximumAPosterioriMap[classIndex] = 0;
-			mTestDigitSet.maximumAPosterioriMap[classIndex] += logOfPriorProbability;
+			double maximumAPosterioriProbability = 0;
+			mTestDigitSet.digits[digitIndex].setMaximumAPosterioriProbabilityForClassIndex(classIndex, maximumAPosterioriProbability);
+			maximumAPosterioriProbability = mTestDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex) + logOfPriorProbability;
+			mTestDigitSet.digits[digitIndex].setMaximumLikelihoodProbabilityForClassIndex(classIndex, maximumAPosterioriProbability);
 			
 			// ML (omit prior probability)
-			mTestDigitSet.maximumLikelihoodMap[classIndex] = 0;
+			double maximumLikelihoodProbability = 0;
+			mTestDigitSet.digits[digitIndex].setMaximumLikelihoodProbabilityForClassIndex(classIndex, maximumLikelihoodProbability);
 			
 			for (int row = 0; row < DIGIT_SIZE; row++) {
 				for (int col = 0; col < DIGIT_SIZE; col++) {
@@ -68,8 +73,11 @@
 					
 					double logOfLikelihood = log10(likelihood);
 					
-					mTestDigitSet.maximumAPosterioriMap[classIndex] += logOfLikelihood;
-					mTestDigitSet.maximumLikelihoodMap[classIndex] += logOfLikelihood;
+					maximumAPosterioriProbability = mTestDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex);
+					maximumLikelihoodProbability = mTestDigitSet.digits[digitIndex].maximumLikelihoodProbabilityForClassIndex(classIndex);
+					
+					mTestDigitSet.digits[digitIndex].setMaximumAPosterioriProbabilityForClassIndex(classIndex, maximumAPosterioriProbability + logOfLikelihood);
+					mTestDigitSet.digits[digitIndex].setMaximumLikelihoodProbabilityForClassIndex(classIndex, maximumLikelihoodProbability + logOfLikelihood);
 				}
 			}
 		}
@@ -78,24 +86,27 @@
 		double mostPositiveMaximumAPosterioriProbability = -DBL_MAX;
 		double mostPositiveMaximumLikelihoodProbability = -DBL_MAX;
 		
-		int maximumAPosterioriDigitClass = -1;
-		int maximumLikelihoodDigitClass = -1;
+		int digitClass = -1;
 		
 		for (int classIndex = 0; classIndex < NUMBER_OF_DIGIT_CLASSES; classIndex++) {
-			double maximumAPosterioriProbability = mTestDigitSet.maximumAPosterioriMap[classIndex];
-			double maximumLikelihoodProbability = mTestDigitSet.maximumLikelihoodMap[classIndex];
+			double maximumAPosterioriProbability = mTestDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex);
+			double maximumLikelihoodProbability = mTestDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex);
 			
-			if (maximumAPosterioriProbability > mostPositiveMaximumAPosterioriProbability) {
-				mostPositiveMaximumAPosterioriProbability = maximumAPosterioriProbability;
-				maximumAPosterioriDigitClass = classIndex;
+			if (_classificationRule == ClassificationRuleMaximumAPosteriori) {
+				if (maximumAPosterioriProbability > mostPositiveMaximumAPosterioriProbability) {
+					mostPositiveMaximumAPosterioriProbability = maximumAPosterioriProbability;
+					digitClass = classIndex;
+				}
 			}
 			
-			if (maximumLikelihoodProbability > mostPositiveMaximumLikelihoodProbability) {
-				mostPositiveMaximumLikelihoodProbability = maximumLikelihoodProbability;
-				maximumLikelihoodDigitClass = classIndex;
+			else if (_classificationRule == ClassificationRuleMaximumLikelihood) {
+				if (maximumLikelihoodProbability > mostPositiveMaximumLikelihoodProbability) {
+					mostPositiveMaximumLikelihoodProbability = maximumLikelihoodProbability;
+					digitClass = classIndex;
+				}
 			}
 			
-			mTestDigitSet.digits[digitIndex].setDigitClass(maximumAPosterioriDigitClass);
+			mTestDigitSet.digits[digitIndex].setDigitClass(digitClass);
 		}
 		
 		float progress = (float)digitIndex/(float)totalNumberOfDigits;

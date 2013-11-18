@@ -35,6 +35,7 @@
 		05ABC018182EF0AF00116729 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05ABC000182EF0AF00116729 /* UIKit.framework */; };
 		05ABC020182EF0AF00116729 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05ABC01E182EF0AF00116729 /* InfoPlist.strings */; };
 		05ABC022182EF0B000116729 /* Naive_Bayes_ClassificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ABC021182EF0B000116729 /* Naive_Bayes_ClassificationTests.m */; };
+		05ADBD0C18397575004F0BC7 /* DigitStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD0A18397575004F0BC7 /* DigitStatistics.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,9 @@
 		05ABC01D182EF0AF00116729 /* Naive Bayes ClassificationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Naive Bayes ClassificationTests-Info.plist"; sourceTree = "<group>"; };
 		05ABC01F182EF0AF00116729 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05ABC021182EF0B000116729 /* Naive_Bayes_ClassificationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Naive_Bayes_ClassificationTests.m; sourceTree = "<group>"; };
+		05ADBD0A18397575004F0BC7 /* DigitStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitStatistics.cpp; sourceTree = "<group>"; };
+		05ADBD0B18397575004F0BC7 /* DigitStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitStatistics.h; sourceTree = "<group>"; };
+		05ADBD0D1839A377004F0BC7 /* DigitClassificaitonRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitClassificaitonRule.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,8 @@
 				05AB2719182F4D7D0097D95A /* DigitSet.cpp */,
 				05AB271D182F63820097D95A /* Digit.h */,
 				05AB271C182F63820097D95A /* Digit.cpp */,
+				05ADBD0B18397575004F0BC7 /* DigitStatistics.h */,
+				05ADBD0A18397575004F0BC7 /* DigitStatistics.cpp */,
 				0537E3A11838A8DC002A3F1C /* QueuePool.h */,
 				0537E3A21838A8DC002A3F1C /* QueuePool.m */,
 				0537E3A41838A9D1002A3F1C /* DigitTrainingOperation.h */,
@@ -164,6 +170,7 @@
 				057C9BE918393F4000458D8A /* DigitTestingOperation.h */,
 				057C9BEA18393F4000458D8A /* DigitTestingOperation.mm */,
 				057C9BE71839381F00458D8A /* DigitOperationDelegate.h */,
+				05ADBD0D1839A377004F0BC7 /* DigitClassificaitonRule.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -365,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05ADBD0C18397575004F0BC7 /* DigitStatistics.cpp in Sources */,
 				05ABC00D182EF0AF00116729 /* AppDelegate.m in Sources */,
 				0537E3A31838A8DC002A3F1C /* QueuePool.m in Sources */,
 				057C9BEB18393F4000458D8A /* DigitTestingOperation.mm in Sources */,

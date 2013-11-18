@@ -13,7 +13,10 @@
 #import "DigitSet.h"
 #import "DigitLabelParser.h"
 #import "DigitParser.h"
+#import "DigitStatistics.h"
 #import "QueuePool.h"
+#import "DigitClassificaitonRule.h"
+#import "DigitClassificaitonRule.h"
 
 #define DIGIT_TESTING_PROGRESS_VIEW_FADE_AWAY_DURATION 2.0
 #define DIGIT_TESTING_NAVIGATION_ITEM_TITLE @"Testing"
@@ -160,7 +163,10 @@
 - (void)testButtonTouched {
 	NSLog(@"Test button touched");
 	
-	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet];
+	// configure classification rule
+	ClassificationRule classificationRule = ClassificationRuleMaximumAPosteriori;
+	
+	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet classificationRule:classificationRule];
 	[digitTestingOperation setDelegate:self];
 	
 	digitTestingOperation.digitTestingOperationCompletionBlock = ^(DigitSet testedDigitSet) {
@@ -193,6 +199,70 @@
 
 - (void)statisticsButtonTouched {
 	NSLog(@"Statistics button touched");
+	
+	DigitStatistics digitStatistics;
+	
+	int successCounts[NUMBER_OF_DIGIT_CLASSES];
+	int confusionMatrixCount[NUMBER_OF_DIGIT_CLASSES][NUMBER_OF_DIGIT_CLASSES];
+	
+	for (int classIndexR = 0; classIndexR < NUMBER_OF_DIGIT_CLASSES; classIndexR++) {
+		int successCount = 0;
+		int confusionCount = 0;
+		
+		successCounts[classIndexR] = successCount;
+		
+		for (int classIndexC = 0; classIndexC < NUMBER_OF_DIGIT_CLASSES; classIndexC++) {
+			confusionMatrixCount[classIndexR][classIndexC] = confusionCount;
+		}
+	}
+	
+	int digitIndex = 0;
+	
+	for (auto it : mTestingDigitSet.digits) {
+		int classifiedDigitClass = mTestingDigitSet.digits[digitIndex].digitClass();
+		int correctDigitClass = mTestingDigitSet.digitLabels[digitIndex];
+		
+		if (classifiedDigitClass == correctDigitClass) {
+			mTestingDigitSet.digits[digitIndex].setClassificationType(ClassificationTypeCorrect);
+			successCounts[classifiedDigitClass]++;
+		}
+		
+		else {
+			mTestingDigitSet.digits[digitIndex].setClassificationType(ClassificationTypeIncorrect);
+		}
+						  
+		// percentage of images in class r that are classified as class c
+		confusionMatrixCount[correctDigitClass][classifiedDigitClass]++;
+		
+		digitIndex++;
+	}
+	
+	int totalNumberOfInstances = 0;
+	int overallSuccessCount = 0;
+	
+	for (int classIndexR = 0; classIndexR < NUMBER_OF_DIGIT_CLASSES; classIndexR++) {
+		int totalNumberOfInstancesFromClass = mTestingDigitSet.frequencyMap[classIndexR];
+		
+		totalNumberOfInstances += totalNumberOfInstancesFromClass;
+		overallSuccessCount += successCounts[classIndexR];
+		
+		double successRate = (double)successCounts[classIndexR]/(double)totalNumberOfInstancesFromClass;
+		
+		digitStatistics.setSuccessRateForClassIndex(classIndexR, successRate);
+		
+		for (int classIndexC = 0; classIndexC < NUMBER_OF_DIGIT_CLASSES; classIndexC++) {
+			double confusionRate = (double)confusionMatrixCount[classIndexR][classIndexC]/(double)totalNumberOfInstancesFromClass;
+		
+			digitStatistics.setConfusionRateForTestImagesFromClassRClassifiedAsClassC(classIndexR, classIndexC, confusionRate);
+		}
+	}
+	
+	double overallSuccessRate = (double)overallSuccessCount/(double)totalNumberOfInstances;
+	digitStatistics.setOverallSuccessRate(overallSuccessRate);
+	
+	digitStatistics.printSuccessRates();
+	digitStatistics.printConfusionMatrix();
+	digitStatistics.printOverallSuccessRate();
 }
 
 #pragma mark - Digit Collection View Cell Delegate

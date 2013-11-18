@@ -150,15 +150,3 @@ void DigitSet::printLikelihoodMaps() {
 		}
 	}
 }
-
-void DigitSet::printMaximumAPosterioriMap() {
-	for (map<int, double>::iterator it = maximumAPosterioriMap.begin(); it != maximumAPosterioriMap.end(); it++) {
-		cout << it->first << ": " << it->second << endl;
-	}
-}
-
-void DigitSet::printMaximumLikelihoodMap() {
-	for (map<int, double>::iterator it = maximumLikelihoodMap.begin(); it != maximumLikelihoodMap.end(); it++) {
-		cout << it->first << ": " << it->second;
-	}
-}

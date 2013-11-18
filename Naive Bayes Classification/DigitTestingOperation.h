@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DigitOperationDelegate.h"
 #include "DigitSet.h"
+#include "DigitClassificaitonRule.h"
 
 typedef void(^DigitTestingOperationHandler)(DigitSet testedDigitSet);
 
@@ -17,6 +18,6 @@ typedef void(^DigitTestingOperationHandler)(DigitSet testedDigitSet);
 @property (copy) DigitTestingOperationHandler digitTestingOperationCompletionBlock;
 @property (nonatomic, weak) id <DigitOperationDelegate> delegate;
 
-- (id)initWithTestDigitSet:(DigitSet)testDigitSet trainingDigitSet:(DigitSet)trainingDigitSet;
+- (id)initWithTestDigitSet:(DigitSet)testDigitSet trainingDigitSet:(DigitSet)trainingDigitSet classificationRule:(ClassificationRule)classificationRule;
 
 @end
