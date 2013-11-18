@@ -8,6 +8,7 @@
 
 #include "Digit.h"
 #include <math.h>
+#include <float.h>
 
 using namespace std;
 
@@ -15,6 +16,8 @@ Digit::Digit() {
 	// -1 means the digit class has not yet been classified
 	mDigitClass = -1;
 	mClassificationType = ClassificationTypeNone;
+	mMostPositiveMaximumAPosterioriProbability = -DBL_MAX;
+	mMostPositiveMaximumLikelihoodProbability = -DBL_MAX;
 }
 
 Digit::~Digit() {}

@@ -27,6 +27,8 @@ class Digit {
 	char mPixels[DIGIT_SIZE][DIGIT_SIZE];
 	map<int, double> mMaximumAPosterioriMap;
 	map<int, double> mMaximumLikelihoodMap;
+	double mMostPositiveMaximumAPosterioriProbability;
+	double mMostPositiveMaximumLikelihoodProbability;
 	ClassificationType mClassificationType;
 	
 	public:

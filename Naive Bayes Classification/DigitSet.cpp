@@ -128,6 +128,7 @@ void DigitSet::printFrequencyMap() {
 	}
 	
 	cout << "total: " << total << endl;
+	cout << endl;
 }
 
 void DigitSet::printPixelFrequencyMaps() {
@@ -139,6 +140,8 @@ void DigitSet::printPixelFrequencyMaps() {
 			cout << pixelFrequencyMapsIterator->first << ": " << pixelFrequencyMapIterator->first << ": " << pixelFrequencyMapIterator->second << endl;
 		}
 	}
+	
+	cout << endl;
 }
 
 void DigitSet::printLikelihoodMaps() {
@@ -149,4 +152,23 @@ void DigitSet::printLikelihoodMaps() {
 			cout << likelihoodMapsIterator->first << ": " << likelihoodMapIterator->first << ": " << likelihoodMapIterator->second << endl;
 		}
 	}
+	
+	cout << endl;
+}
+
+void DigitSet::printPrototypicalMaximumAPosterioriDigitIndexMap() {
+	for (auto it : prototypicalMaximumAPosterioriDigitIndexMap) {
+		cout << it.first << ": " << it.second << endl;
+	}
+	
+	cout << endl;
+}
+
+
+void DigitSet::printPrototypicalMaximumLikelihoodDigitIndexMap() {
+	for (auto it : prototypicalMaximumLikelihoodDigitIndexMap) {
+		cout << it.first << ": " << it.second << endl;
+	}
+	
+	cout << endl;
 }

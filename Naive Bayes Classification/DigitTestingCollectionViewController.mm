@@ -202,6 +202,7 @@
 	
 	DigitStatistics digitStatistics;
 	
+	// set success rates, confusion matrix, and overall success rate
 	int successCounts[NUMBER_OF_DIGIT_CLASSES];
 	int confusionMatrixCount[NUMBER_OF_DIGIT_CLASSES][NUMBER_OF_DIGIT_CLASSES];
 	
@@ -216,12 +217,21 @@
 		}
 	}
 	
+	map<int, double> mostPositiveMaximumAPosterioriProbabilityMap;
+	map<int, double> mostPositiveMaximumLikelihoodProbabilityMap;
+	
+	for (int classIndex = 0; classIndex < NUMBER_OF_DIGIT_CLASSES; classIndex++) {
+		mostPositiveMaximumAPosterioriProbabilityMap[classIndex] = -DBL_MAX;
+		mostPositiveMaximumLikelihoodProbabilityMap[classIndex] = -DBL_MAX;
+	}
+	
 	int digitIndex = 0;
 	
 	for (auto it : mTestingDigitSet.digits) {
-		int classifiedDigitClass = mTestingDigitSet.digits[digitIndex].digitClass();
+		int classifiedDigitClass = it.digitClass();
 		int correctDigitClass = mTestingDigitSet.digitLabels[digitIndex];
 		
+		// set classification type
 		if (classifiedDigitClass == correctDigitClass) {
 			mTestingDigitSet.digits[digitIndex].setClassificationType(ClassificationTypeCorrect);
 			successCounts[classifiedDigitClass]++;
@@ -233,6 +243,19 @@
 						  
 		// percentage of images in class r that are classified as class c
 		confusionMatrixCount[correctDigitClass][classifiedDigitClass]++;
+		
+		// find prototypical instance from each class
+		for (int classIndex = 0; classIndex < NUMBER_OF_DIGIT_CLASSES; classIndex++) {
+			if (mTestingDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex) > mostPositiveMaximumAPosterioriProbabilityMap[classIndex]) {
+				mostPositiveMaximumAPosterioriProbabilityMap[classIndex] = mTestingDigitSet.digits[digitIndex].maximumAPosterioriProbabilityForClassIndex(classIndex);;
+				mTestingDigitSet.prototypicalMaximumAPosterioriDigitIndexMap[classIndex] = digitIndex;
+			}
+			
+			if (mTestingDigitSet.digits[digitIndex].maximumLikelihoodProbabilityForClassIndex(classIndex) > mostPositiveMaximumLikelihoodProbabilityMap[classIndex]) {
+				mostPositiveMaximumLikelihoodProbabilityMap[classIndex] = mTestingDigitSet.digits[digitIndex].maximumLikelihoodProbabilityForClassIndex(classIndex);
+				mTestingDigitSet.prototypicalMaximumLikelihoodDigitIndexMap[classIndex] = digitIndex;
+			}
+		}
 		
 		digitIndex++;
 	}
@@ -263,6 +286,9 @@
 	digitStatistics.printSuccessRates();
 	digitStatistics.printConfusionMatrix();
 	digitStatistics.printOverallSuccessRate();
+	
+	mTestingDigitSet.printPrototypicalMaximumAPosterioriDigitIndexMap();
+	mTestingDigitSet.printPrototypicalMaximumLikelihoodDigitIndexMap();
 }
 
 #pragma mark - Digit Collection View Cell Delegate
