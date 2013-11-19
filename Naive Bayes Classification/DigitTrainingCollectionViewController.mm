@@ -14,10 +14,11 @@
 #import "DigitLabelParser.h"
 #import "DigitSet.h"
 #import "QueuePool.h"
+#import "ImageMaker.h"
 
 #define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
 #define TRAIN_BUTTON_TITLE @"Train"
-#define TEST_SET_BUTTON_TITLE @"Test Set"
+#define TEST_SET_BUTTON_TITLE @"Test set"
 #define TRAINING_LABELS_TEXT_NAME @"traininglabels"
 #define TRAINING_IMAGES_TEXT_NAME @"trainingimages"
 #define DIGIT_TRAINING_PROGRESS_VIEW_FADE_DURATION 2.0
@@ -28,6 +29,18 @@
 	UIProgressView *_progressView;
 	UIBarButtonItem *_trainButton;
 	UIBarButtonItem *_testSetButton;
+	UIColor *_backgroundColor;
+	NSArray *_digitImages;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
+	self = [super initWithCollectionViewLayout:layout];
+	
+	if (self) {
+		_backgroundColor = [UIColor whiteColor];
+	}
+	
+	return self;
 }
 
 - (void)viewDidLoad {
@@ -40,6 +53,7 @@
 	[self setUpDigitSet];
 	[self parseDigits];
 	[self setUpDigits];
+	_digitImages = [self imagesFromRawData];
 }
 
 - (void)setUpNavigation {
@@ -49,6 +63,7 @@
 
 - (void)setUpCollection {
 	[self.collectionView registerClass:[DigitCollectionViewCell class] forCellWithReuseIdentifier:DigitTrainingCollectionViewCellIdentifier];
+	[self.collectionView setBackgroundColor:_backgroundColor];
 }
 
 - (void)setUpProgressView {
@@ -76,14 +91,15 @@
 
 	cell.delegate = self;
 	cell.dataSource = self;
-	
-	[cell setNeedsDisplay];
+
+	UIImage *digitImage = _digitImages[indexPath.row];
+	[cell.imageView setImage:digitImage];
 	
 	return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger digitCellSize = DIGIT_SIZE * DIGIT_SIZE_MULTIPLIER;
+	NSUInteger digitCellSize = DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER/2;
 	
 	return CGSizeMake(digitCellSize, digitCellSize);
 }
@@ -173,6 +189,24 @@
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitTestingCollectionViewController];
 	
 	[self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - Images from Raw Data
+
+- (NSArray *)imagesFromRawData {
+	NSMutableArray *images = [NSMutableArray arrayWithCapacity:mDigitSet.digits.size()];
+	
+	NSUInteger digitIndex = 0;
+	
+	for (auto it : mDigitSet.digits) {
+		UIImage *image = [ImageMaker imageFromRawImageData:mDigitSet.digits[digitIndex].imageBuffer() width:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER height:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER numberOfColorComponents:NUMBER_OF_COLOR_COMPONENTS bitsPerColorComponent:NUMBER_OF_BITS_PER_COMPONENT];
+		
+		[images insertObject:image atIndex:digitIndex];
+		
+		digitIndex++;
+	}
+	
+	return [images copy];
 }
 
 #pragma mark - Digit Collection View Cell Delegate

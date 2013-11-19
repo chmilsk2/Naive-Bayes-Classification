@@ -22,6 +22,37 @@ Digit::Digit() {
 
 Digit::~Digit() {}
 
+#pragma mark - Image Buffer
+
+unsigned char * Digit::imageBuffer() {
+	return mImageBuffer;
+}
+
+void Digit::setImageBufferRGBForRowCol(int r, int g, int b, int row, int col) {
+	// using row major order: offset = row*NUMCOLS + column
+	int offset = (row*(DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER)*DIGIT_SIZE_MULTIPLIER + col*DIGIT_SIZE_MULTIPLIER)*NUMBER_OF_COLOR_COMPONENTS;
+	
+	// only consider image scale size of 1 for now
+	int redOffset = 0;
+	int greenOffset = 1;
+	int blueOffset = 2;
+	
+	for (int row = 0; row < DIGIT_SIZE_MULTIPLIER; row++) {
+		int priorOffset = offset;
+		
+		for (int col = 0; col < DIGIT_SIZE_MULTIPLIER; col++) {
+			mImageBuffer[offset+redOffset] = r;
+			mImageBuffer[offset+greenOffset] = g;
+			mImageBuffer[offset+blueOffset] = b;
+			
+			offset += NUMBER_OF_COLOR_COMPONENTS;
+		}
+		
+		offset = priorOffset;
+		offset += DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER*NUMBER_OF_COLOR_COMPONENTS;
+	}
+}
+
 #pragma mark - Digit Class
 
 int Digit::digitClass() {

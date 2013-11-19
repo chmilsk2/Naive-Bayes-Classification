@@ -8,6 +8,7 @@
 
 #import "DigitTestingCollectionViewController.h"
 #import "DigitDetailsViewController.h"
+#import "DigitStatisticsViewController.h"
 #import "DigitTestingOperation.h"
 #import "DigitCollectionViewCell.h"
 #import "DigitSet.h"
@@ -99,7 +100,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger digitCellSize = DIGIT_SIZE * DIGIT_SIZE_MULTIPLIER;
+	NSUInteger digitCellSize = DIGIT_SIZE;
 	
 	return CGSizeMake(digitCellSize, digitCellSize);
 }
@@ -199,6 +200,15 @@
 
 - (void)statisticsButtonTouched {
 	NSLog(@"Statistics button touched");
+	
+	DigitStatisticsViewController *digitStatisticsViewController = [[DigitStatisticsViewController alloc] init];
+	
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitStatisticsViewController];
+		
+	[navController setModalPresentationStyle:UIModalPresentationFormSheet];
+	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+	
+	[self presentViewController:navController animated:YES completion:nil];
 	
 	DigitStatistics digitStatistics;
 	

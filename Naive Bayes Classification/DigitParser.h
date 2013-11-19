@@ -24,6 +24,7 @@ class DigitParser {
 		
 	private:
 		const char *mFilePath;
+		void RGBValuesForValue(char value, int componentValues[NUMBER_OF_COLOR_COMPONENTS]);
 };
 
 #endif /* defined(__Naive_Bayes_Classification__DigitParser__) */

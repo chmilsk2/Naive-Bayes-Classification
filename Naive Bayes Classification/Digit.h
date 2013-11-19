@@ -13,6 +13,8 @@
 #include <map>
 
 #define DIGIT_SIZE 28
+#define NUMBER_OF_COLOR_COMPONENTS 4
+#define NUMBER_OF_BITS_PER_COMPONENT 8
 
 using namespace std;
 
@@ -23,6 +25,8 @@ enum ClassificationType {
 };
 
 class Digit {
+	// image buffer is of type unsigned char since the size of unsigned char is 8 bits RGB8 represents each color component with 8 bits, this custom format ignores the alpha component, normally the typical format is RGBA8 which is 32 bits in size due to the 4 8 bit components
+	unsigned char mImageBuffer[DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER*DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER*NUMBER_OF_COLOR_COMPONENTS];
 	int mDigitClass;
 	char mPixels[DIGIT_SIZE][DIGIT_SIZE];
 	map<int, double> mMaximumAPosterioriMap;
@@ -34,6 +38,10 @@ class Digit {
 	public:
 		Digit();
 		~Digit();
+	
+		// image buffer
+		unsigned char *imageBuffer();
+		void setImageBufferRGBForRowCol(int r, int g, int b, int row, int col);
 	
 		// digit class
 		int digitClass();

@@ -26,5 +26,6 @@
 
 @property (nonatomic, weak) id <DigitCollectionViewDelegate> delegate;
 @property (nonatomic, weak) id <DigitCollectionViewDataSource> dataSource;
+@property (nonatomic, strong) UIImageView *imageView;
 
 @end

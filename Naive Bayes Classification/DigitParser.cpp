@@ -37,8 +37,14 @@ void DigitParser::parseDigits(DigitSet &digitSet) {
 			
 			for (string::iterator it = line.begin(); it != line.end(); ++it) {
 				char value = *it;
-				
+							
 				digit.setPixelValue(row, col, value);
+				
+				int componentValues[NUMBER_OF_COLOR_COMPONENTS];
+				
+				RGBValuesForValue(value, componentValues);
+				
+				digit.setImageBufferRGBForRowCol(componentValues[0], componentValues[1], componentValues[2], row, col);
 				
 				col++;
 			}
@@ -54,5 +60,34 @@ void DigitParser::parseDigits(DigitSet &digitSet) {
 			}
 		}
 	}
+}
+
+void DigitParser::RGBValuesForValue(char value, int componentValues[NUMBER_OF_COLOR_COMPONENTS]) {
+	int red = 0;
+	int green = 0;
+	int blue = 0;
+	
+	// add pixel colors to image buffer
+	if (value == '#') {
+		red = 0;
+		green = 0;
+		blue = 0;
+	}
+	
+	else if (value == '+') {
+		red = 130;
+		green = 130;
+		blue = 130;
+	}
+	
+	else if (value == ' ') {
+		red = 255;
+		green = 255;
+		blue = 255;
+	}
+	
+	componentValues[0] = red;
+	componentValues[1] = green;
+	componentValues[2] = blue;
 }
 
