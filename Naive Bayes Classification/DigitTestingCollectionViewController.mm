@@ -31,6 +31,7 @@
 @implementation DigitTestingCollectionViewController {
 	DigitSet mTrainingDigitSet;
 	DigitSet mTestingDigitSet;
+	DigitStatistics mDigitStatistics;
 	UIBarButtonItem *_cancelButton;
 	UIBarButtonItem *_testButton;
 	UIBarButtonItem *_statisticsButton;
@@ -227,8 +228,8 @@
 - (void)statisticsButtonTouched {
 	NSLog(@"Statistics button touched");
 	
-	DigitStatisticsViewController *digitStatisticsViewController = [[DigitStatisticsViewController alloc] initWithDigitSet:mTestingDigitSet
-																										classificationRule:_classificationRule];
+	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+	DigitStatisticsViewController *digitStatisticsViewController = [[DigitStatisticsViewController alloc] initWithCollectionViewLayout:flowLayout trainingDigitSet:mTrainingDigitSet testingDigitSet:mTestingDigitSet statistics:mDigitStatistics classificationRule:_classificationRule];
 	
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitStatisticsViewController];
 		
@@ -259,8 +260,6 @@
 #pragma mark - Statistics
 
 - (void)statistics {
-	DigitStatistics digitStatistics;
-	
 	// set success rates, confusion matrix, and overall success rate
 	int successCounts[NUMBER_OF_DIGIT_CLASSES];
 	int confusionMatrixCount[NUMBER_OF_DIGIT_CLASSES][NUMBER_OF_DIGIT_CLASSES];
@@ -330,21 +329,21 @@
 		
 		double successRate = (double)successCounts[classIndexR]/(double)totalNumberOfInstancesFromClass;
 		
-		digitStatistics.setSuccessRateForClassIndex(classIndexR, successRate);
+		mDigitStatistics.setSuccessRateForClassIndex(classIndexR, successRate);
 		
 		for (int classIndexC = 0; classIndexC < NUMBER_OF_DIGIT_CLASSES; classIndexC++) {
 			double confusionRate = (double)confusionMatrixCount[classIndexR][classIndexC]/(double)totalNumberOfInstancesFromClass;
 			
-			digitStatistics.setConfusionRateForTestImagesFromClassRClassifiedAsClassC(classIndexR, classIndexC, confusionRate);
+			mDigitStatistics.setConfusionRateForTestImagesFromClassRClassifiedAsClassC(classIndexR, classIndexC, confusionRate);
 		}
 	}
 	
 	double overallSuccessRate = (double)overallSuccessCount/(double)totalNumberOfInstances;
-	digitStatistics.setOverallSuccessRate(overallSuccessRate);
+	mDigitStatistics.setOverallSuccessRate(overallSuccessRate);
 	
-	digitStatistics.printSuccessRates();
-	digitStatistics.printConfusionMatrix();
-	digitStatistics.printOverallSuccessRate();
+	mDigitStatistics.printSuccessRates();
+	mDigitStatistics.printConfusionMatrix();
+	mDigitStatistics.printOverallSuccessRate();
 	
 	mTestingDigitSet.printPrototypicalMaximumAPosterioriDigitIndexMap();
 	mTestingDigitSet.printPrototypicalMaximumLikelihoodDigitIndexMap();
@@ -354,32 +353,6 @@
 
 - (CGFloat)imageSize {
 	return (CGFloat)(DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER);
-}
-
-#pragma mark - Digit Collection View Cell Data Source
-
-- (UIColor *)pixelColorForDigitCell:(DigitCollectionViewCell *)digitCollectionViewCell Row:(NSUInteger)row col:(NSUInteger)col {
-	UIColor *pixelColor;
-	
-	NSIndexPath *indexPath = [self.collectionView indexPathForCell:digitCollectionViewCell];
-	
-	Digit digit = mTestingDigitSet.digits[indexPath.row];
-	
-	char pixelChar = digit.pixelValue((int)row, (int)col);
-	
-	if (pixelChar == ' ') {
-		pixelColor = [UIColor whiteColor];
-	}
-	
-	else if (pixelChar == '+') {
-		pixelColor = [UIColor grayColor];
-	}
-	
-	else if (pixelChar == '#') {
-		pixelColor = [UIColor blackColor];
-	}
-	
-	return pixelColor;
 }
 
 #pragma mark - Digit Training Operation Delegate

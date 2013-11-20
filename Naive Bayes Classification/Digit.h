@@ -12,10 +12,6 @@
 #include <iostream>
 #include <map>
 
-#define DIGIT_SIZE 28
-#define NUMBER_OF_COLOR_COMPONENTS 4
-#define NUMBER_OF_BITS_PER_COMPONENT 8
-
 using namespace std;
 
 enum ClassificationType {

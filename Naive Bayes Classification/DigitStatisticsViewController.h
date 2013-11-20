@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DigitSet.h"
 #import "DigitClassificaitonRule.h"
+#import "DigitStatistics.h"
+#import "DigitCollectionViewCell.h"
 
-@interface DigitStatisticsViewController : UIViewController
+@interface DigitStatisticsViewController : UICollectionViewController <DigitCollectionViewDelegate>
 
-- (id)initWithDigitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule;
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout trainingDigitSet:(DigitSet)trainingDigitSet testingDigitSet:(DigitSet)testingDigitSet statistics:(DigitStatistics)digitStatistics classificationRule:(ClassificationRule)classificationRule;
 
 @end

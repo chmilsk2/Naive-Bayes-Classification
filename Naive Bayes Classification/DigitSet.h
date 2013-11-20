@@ -68,6 +68,9 @@ class DigitSet {
 		// likelihood maps keeps track of P(Fij | class) for every pixel location (i,j) and for every digit class from 0 to 9
 		map<int, map<int, double>> likelihoodMaps;
 	
+		// feature likelihood image buffer for class index
+		unsigned char * featureLikelihoodImageBufferForClassIndex(int classIndex);
+	
 		// prototypical MAP digit index map
 		map<int, int> prototypicalMaximumAPosterioriDigitIndexMap;
 	

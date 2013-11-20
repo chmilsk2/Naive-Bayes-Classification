@@ -7,9 +7,21 @@
 //
 
 #include "DigitStatistics.h"
+#include <algorithm>
 #include <iomanip>
+#include <float.h>
 
 #define DIGIT_LENGTH 3
+
+typedef struct ConfusionItem {
+	int row;
+	int col;
+	double confusionRate;
+	
+	bool operator < (const ConfusionItem &confusionItem) const {
+        return (confusionItem.confusionRate < confusionRate);
+    }
+} ConfusionItem;
 
 DigitStatistics::DigitStatistics() {};
 
@@ -47,6 +59,44 @@ double DigitStatistics::confusionRateForTestImagesFromClassRClassifiedAsClassC(i
 
 void DigitStatistics::setConfusionRateForTestImagesFromClassRClassifiedAsClassC(int classIndexR, int classIndexC, double confusionRate) {
 	mConfusionMatrix[classIndexR][classIndexC] = confusionRate;
+}
+
+vector<pair<int, int>> DigitStatistics::nHighestConfusionPairs(int n) {
+	vector<pair<int, int>> highestConfusionPairs;
+	
+	vector<ConfusionItem> highestConfusionItems;
+	
+	for (int i = 0; i < n; i++) {
+		ConfusionItem confusionItem;
+		confusionItem.row = -1;
+		confusionItem.col = -1;
+		confusionItem.confusionRate = -DBL_MAX;
+		highestConfusionItems.push_back(confusionItem);
+	}
+	
+	for (int row = 0; row < NUMBER_OF_DIGIT_CLASSES; row++) {
+		for (int col = 0; col < NUMBER_OF_DIGIT_CLASSES; col++) {
+			if (row != col) {
+				double confusionRate = mConfusionMatrix[row][col];
+				
+				if (confusionRate > 0 && confusionRate > highestConfusionItems.back().confusionRate) {
+					highestConfusionItems.back().row = row;
+					highestConfusionItems.back().col = col;
+					highestConfusionItems.back().confusionRate = confusionRate;
+				}
+				
+				// sort the confusion rates from highest to lowest
+				sort(highestConfusionItems.begin(), highestConfusionItems.end());
+			}
+		}
+	}
+	
+	for (auto it : highestConfusionItems) {
+		pair<int, int> pair(it.row, it.col);
+		highestConfusionPairs.push_back(pair);
+	}
+	
+	return highestConfusionPairs;
 }
 
 #pragma mark - Logging

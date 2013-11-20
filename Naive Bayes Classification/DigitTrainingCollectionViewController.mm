@@ -206,32 +206,6 @@
 	return (CGFloat)(DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER);
 }
 
-#pragma mark - Digit Collection View Cell Data Source
-
-- (UIColor *)pixelColorForDigitCell:(DigitCollectionViewCell *)digitCollectionViewCell Row:(NSUInteger)row col:(NSUInteger)col {
-	UIColor *pixelColor;
-	
-	NSIndexPath *indexPath = [self.collectionView indexPathForCell:digitCollectionViewCell];
-	
-	Digit digit = mDigitSet.digits[indexPath.row];
-	
-	char pixelChar = digit.pixelValue((int)row, (int)col);
-	
-	if (pixelChar == ' ') {
-		pixelColor = [UIColor whiteColor];
-	}
-	
-	else if (pixelChar == '+') {
-		pixelColor = [UIColor grayColor];
-	}
-	
-	else if (pixelChar == '#') {
-		pixelColor = [UIColor blackColor];
-	}
-	
-	return pixelColor;
-}
-
 #pragma mark - Digit Training Operation Delegate
 
 - (void)showProgressView {

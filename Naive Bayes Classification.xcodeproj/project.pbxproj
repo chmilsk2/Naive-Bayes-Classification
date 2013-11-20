@@ -19,6 +19,7 @@
 		05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */; };
 		056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 056761F6182F14D700C1A3EA /* DigitParser.cpp */; };
 		057C9BEB18393F4000458D8A /* DigitTestingOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 057C9BEA18393F4000458D8A /* DigitTestingOperation.mm */; };
+		05A190E9183C6F86005AD7C9 /* OddsRatio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05A190E7183C6F86005AD7C9 /* OddsRatio.cpp */; };
 		05AB2715182F49A40097D95A /* traininglabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05AB2714182F49A40097D95A /* traininglabels.txt */; };
 		05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB2716182F49F00097D95A /* DigitLabelParser.cpp */; };
 		05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05AB2719182F4D7D0097D95A /* DigitSet.cpp */; };
@@ -73,6 +74,8 @@
 		057C9BE71839381F00458D8A /* DigitOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitOperationDelegate.h; sourceTree = "<group>"; };
 		057C9BE918393F4000458D8A /* DigitTestingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitTestingOperation.h; sourceTree = "<group>"; };
 		057C9BEA18393F4000458D8A /* DigitTestingOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTestingOperation.mm; sourceTree = "<group>"; };
+		05A190E7183C6F86005AD7C9 /* OddsRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OddsRatio.cpp; sourceTree = "<group>"; };
+		05A190E8183C6F86005AD7C9 /* OddsRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OddsRatio.h; sourceTree = "<group>"; };
 		05AB2714182F49A40097D95A /* traininglabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = traininglabels.txt; sourceTree = "<group>"; };
 		05AB2716182F49F00097D95A /* DigitLabelParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitLabelParser.cpp; sourceTree = "<group>"; };
 		05AB2717182F49F00097D95A /* DigitLabelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitLabelParser.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				05AB2719182F4D7D0097D95A /* DigitSet.cpp */,
 				05AB271D182F63820097D95A /* Digit.h */,
 				05AB271C182F63820097D95A /* Digit.cpp */,
+				05A190E8183C6F86005AD7C9 /* OddsRatio.h */,
+				05A190E7183C6F86005AD7C9 /* OddsRatio.cpp */,
 				05ADBD0B18397575004F0BC7 /* DigitStatistics.h */,
 				05ADBD0A18397575004F0BC7 /* DigitStatistics.cpp */,
 				0537E3A11838A8DC002A3F1C /* QueuePool.h */,
@@ -397,6 +402,7 @@
 				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
 				05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */,
 				05AB271E182F63820097D95A /* Digit.cpp in Sources */,
+				05A190E9183C6F86005AD7C9 /* OddsRatio.cpp in Sources */,
 				0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */,
 				0537E3A61838A9D1002A3F1C /* DigitTrainingOperation.mm in Sources */,
 			);

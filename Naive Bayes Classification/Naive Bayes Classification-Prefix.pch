@@ -15,5 +15,8 @@
 	#import <Foundation/Foundation.h>
 #endif
 
+#define DIGIT_SIZE 28
+#define NUMBER_OF_COLOR_COMPONENTS 4
+#define NUMBER_OF_BITS_PER_COMPONENT 8
 #define DIGIT_SIZE_MULTIPLIER 1
 #define NUMBER_OF_DIGIT_CLASSES 10

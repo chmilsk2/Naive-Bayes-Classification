@@ -10,6 +10,7 @@
 #define __Naive_Bayes_Classification__DigitStatistics__
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -23,12 +24,19 @@ class DigitStatistics {
 	public:
 		DigitStatistics();
 		~DigitStatistics();
+	
+		// overall success rate
 		double overallSuccessRate();
 		void setOverallSuccessRate(double overallSuccessRate);
+	
+		// success rate
 		double successRateForClassIndex(int classIndex);
 		void setSuccessRateForClassIndex(int classIndex, double successRate);
+	
+		// confusion rate
 		double confusionRateForTestImagesFromClassRClassifiedAsClassC(int classIndexR, int classIndexC);
 		void setConfusionRateForTestImagesFromClassRClassifiedAsClassC(int classIndexR, int classIndexC, double confusionRate);
+		vector<pair<int, int>> nHighestConfusionPairs(int n);
 	
 		// logging
 		void printOverallSuccessRate();
