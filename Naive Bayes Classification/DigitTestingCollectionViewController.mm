@@ -200,9 +200,10 @@
 		
 		mTestingDigitSet = testedDigitSet;
 		
-		[self.collectionView reloadData];
-		
 		[self didFinishUpdatingProgressView];
+		
+		[self statistics];
+		[self.collectionView reloadData];
 	};
 	
 	[[QueuePool sharedQueuePool].queue addOperation:digitTestingOperation];
@@ -234,7 +235,29 @@
 	[navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 	
 	[self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - Images from Raw Data
+
+- (NSArray *)imagesFromRawData {
+	NSMutableArray *images = [NSMutableArray arrayWithCapacity:mTestingDigitSet.digits.size()];
 	
+	NSUInteger digitIndex = 0;
+	
+	for (auto it : mTestingDigitSet.digits) {
+		UIImage *image = [ImageMaker imageFromRawImageData:mTestingDigitSet.digits[digitIndex].imageBuffer() width:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER height:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER numberOfColorComponents:NUMBER_OF_COLOR_COMPONENTS bitsPerColorComponent:NUMBER_OF_BITS_PER_COMPONENT];
+		
+		[images insertObject:image atIndex:digitIndex];
+		
+		digitIndex++;
+	}
+	
+	return [images copy];
+}
+
+#pragma mark - Statistics
+
+- (void)statistics {
 	DigitStatistics digitStatistics;
 	
 	// set success rates, confusion matrix, and overall success rate
@@ -275,7 +298,7 @@
 		else {
 			mTestingDigitSet.digits[digitIndex].setClassificationType(ClassificationTypeIncorrect);
 		}
-						  
+		
 		// percentage of images in class r that are classified as class c
 		confusionMatrixCount[correctDigitClass][classifiedDigitClass]++;
 		
@@ -310,7 +333,7 @@
 		
 		for (int classIndexC = 0; classIndexC < NUMBER_OF_DIGIT_CLASSES; classIndexC++) {
 			double confusionRate = (double)confusionMatrixCount[classIndexR][classIndexC]/(double)totalNumberOfInstancesFromClass;
-		
+			
 			digitStatistics.setConfusionRateForTestImagesFromClassRClassifiedAsClassC(classIndexR, classIndexC, confusionRate);
 		}
 	}
@@ -324,24 +347,6 @@
 	
 	mTestingDigitSet.printPrototypicalMaximumAPosterioriDigitIndexMap();
 	mTestingDigitSet.printPrototypicalMaximumLikelihoodDigitIndexMap();
-}
-
-#pragma mark - Images from Raw Data
-
-- (NSArray *)imagesFromRawData {
-	NSMutableArray *images = [NSMutableArray arrayWithCapacity:mTestingDigitSet.digits.size()];
-	
-	NSUInteger digitIndex = 0;
-	
-	for (auto it : mTestingDigitSet.digits) {
-		UIImage *image = [ImageMaker imageFromRawImageData:mTestingDigitSet.digits[digitIndex].imageBuffer() width:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER height:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER numberOfColorComponents:NUMBER_OF_COLOR_COMPONENTS bitsPerColorComponent:NUMBER_OF_BITS_PER_COMPONENT];
-		
-		[images insertObject:image atIndex:digitIndex];
-		
-		digitIndex++;
-	}
-	
-	return [images copy];
 }
 
 #pragma mark - Digit Collection View Cell Delegate
