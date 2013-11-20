@@ -7,7 +7,6 @@
 //
 
 #import "DigitTestingCollectionViewController.h"
-#import "DigitDetailsViewController.h"
 #import "DigitStatisticsViewController.h"
 #import "DigitTestingOperation.h"
 #import "DigitCollectionViewCell.h"
@@ -18,7 +17,9 @@
 #import "QueuePool.h"
 #import "DigitClassificaitonRule.h"
 #import "DigitClassificaitonRule.h"
+#import "ImageMaker.h"
 
+#define TESTING_CELL_SIZE_MULTIPLIER 2
 #define DIGIT_TESTING_PROGRESS_VIEW_FADE_AWAY_DURATION 2.0
 #define DIGIT_TESTING_NAVIGATION_ITEM_TITLE @"Testing"
 #define TEST_BUTTON_TITLE @"Test"
@@ -34,13 +35,20 @@
 	UIBarButtonItem *_testButton;
 	UIBarButtonItem *_statisticsButton;
 	UIProgressView *_progressView;
+	UIColor *_backgroundColor;
+	UIColor *_correctClassificationTextColor;
+	UIColor *_incorrectClassificationTextColor;
+	NSArray *_digitImages;
 }
 
 - (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout trainingDigitSet:(DigitSet)trainingDigitSet {
 	self = [super initWithCollectionViewLayout:flowLayout];
 	
 	if (self) {
+		_backgroundColor = [UIColor whiteColor];
 		mTrainingDigitSet = trainingDigitSet;
+		_correctClassificationTextColor = [UIColor colorWithRed:46.0/255.0 green:139.0/255.0 blue:87.0/255.0 alpha:1.0];
+		_incorrectClassificationTextColor = [UIColor colorWithRed:1.0 green:99.0/255.0 blue:71.0/255.0 alpha:1.0];
 	}
 	
 	return self;
@@ -56,6 +64,8 @@
 	[self parseDigitLabels];
 	[self setUpDigitSet];
 	[self parseDigits];
+	_digitImages = [self imagesFromRawData];
+
 }
 
 - (void)setUpNavigation {
@@ -66,6 +76,7 @@
 
 - (void)setUpCollection {
 	[self.collectionView registerClass:[DigitCollectionViewCell class] forCellWithReuseIdentifier:DigitTestingCollectionViewCellIdentifier];
+	[self.collectionView setBackgroundColor:_backgroundColor];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -94,27 +105,41 @@
 	cell.delegate = self;
 	cell.dataSource = self;
 	
-	[cell setNeedsDisplay];
+	// set image
+	UIImage *digitImage = _digitImages[indexPath.row];
+	[cell.imageView setImage:digitImage];
+	
+	// set text
+	ClassificationType classificationType = mTestingDigitSet.digits[indexPath.row].classificationType();
+
+	if (classificationType != ClassificationTypeNone) {
+		[cell.classificationLabel setText:[NSString stringWithFormat:@"%d", mTestingDigitSet.digits[indexPath.row].digitClass()]];
+		
+		// set text color
+		UIColor *textColor = [UIColor blackColor];
+		
+		if (classificationType == ClassificationTypeCorrect) {
+			textColor = _correctClassificationTextColor;
+		}
+		
+		else if (classificationType == ClassificationTypeIncorrect) {
+			textColor = _incorrectClassificationTextColor;
+		}
+		
+		[cell.classificationLabel setTextColor:textColor];
+	}
+	
+	else {
+		[cell.classificationLabel setText:@""];
+	}
 	
 	return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger digitCellSize = DIGIT_SIZE;
+	NSUInteger digitCellSize = DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER*TESTING_CELL_SIZE_MULTIPLIER;
 	
 	return CGSizeMake(digitCellSize, digitCellSize);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	Digit selectedDigit = mTestingDigitSet.digits[indexPath.row];
-	
-	DigitDetailsViewController *digitDetailsViewController = [[DigitDetailsViewController alloc] initWithDigit:selectedDigit];
-	UINavigationController *digitDetailsNavController = [[UINavigationController alloc] initWithRootViewController:digitDetailsViewController];
-	
-	[digitDetailsNavController setModalPresentationStyle:UIModalPresentationFormSheet];
-	[digitDetailsNavController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-	
-	[self presentViewController:digitDetailsNavController animated:YES completion:nil];
 }
 
 - (void)parseDigitLabels {
@@ -301,10 +326,28 @@
 	mTestingDigitSet.printPrototypicalMaximumLikelihoodDigitIndexMap();
 }
 
+#pragma mark - Images from Raw Data
+
+- (NSArray *)imagesFromRawData {
+	NSMutableArray *images = [NSMutableArray arrayWithCapacity:mTestingDigitSet.digits.size()];
+	
+	NSUInteger digitIndex = 0;
+	
+	for (auto it : mTestingDigitSet.digits) {
+		UIImage *image = [ImageMaker imageFromRawImageData:mTestingDigitSet.digits[digitIndex].imageBuffer() width:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER height:DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER numberOfColorComponents:NUMBER_OF_COLOR_COMPONENTS bitsPerColorComponent:NUMBER_OF_BITS_PER_COMPONENT];
+		
+		[images insertObject:image atIndex:digitIndex];
+		
+		digitIndex++;
+	}
+	
+	return [images copy];
+}
+
 #pragma mark - Digit Collection View Cell Delegate
 
-- (CGFloat)cellSize {
-	return (CGFloat)DIGIT_SIZE;
+- (CGFloat)imageSize {
+	return (CGFloat)(DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER);
 }
 
 #pragma mark - Digit Collection View Cell Data Source

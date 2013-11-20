@@ -8,6 +8,9 @@
 
 #import "DigitCollectionViewCell.h"
 
+#define LABEL_HEIGHT_FACTOR 4;
+#define CLASSIFICATION_LABEL_FONT_SIZE 12.0f
+
 @implementation DigitCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -16,17 +19,26 @@
 	
     if (self) {
 		[self setUpImageView];
+		[self setUpClassificationLabel];
     }
 	
     return self;
 }
 
 - (void)setUpImageView {
-	_imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	_imageView.contentMode = UIViewContentModeScaleAspectFill;
 	_imageView.clipsToBounds = YES;
 	
 	[self.contentView addSubview:_imageView];
+}
+
+- (void)setUpClassificationLabel {
+	_classificationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	[_classificationLabel setTextAlignment:NSTextAlignmentCenter];
+	[_classificationLabel setFont:[UIFont systemFontOfSize:CLASSIFICATION_LABEL_FONT_SIZE]];
+	
+	[self.contentView addSubview:_classificationLabel];
 }
 
 - (void)prepareForReuse
@@ -36,34 +48,20 @@
     self.imageView.image = nil;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-//- (void)drawRect:(CGRect)rect
-//{
-//    // Drawing code
-//	CGContextRef ctx = UIGraphicsGetCurrentContext();
-//	
-//	CGFloat cellSize = 0;
-//	
-//	if ([self.delegate respondsToSelector:@selector(cellSize)]) {
-//		cellSize = [self.delegate cellSize];
-//	}
-//	
-//	// the 'pixel' in this case is each individual colored cell within each digit
-//	// it is strectched by a multiplier value
-//	CGFloat stretchedPixelSize = self.frame.size.width/cellSize;
-//	
-//	for (NSUInteger row = 0; row < cellSize; row++) {
-//		for (NSUInteger col = 0; col < cellSize; col++) {
-//			UIColor *fillColor;
-//			
-//			if ([self.dataSource respondsToSelector:@selector(pixelColorForDigitCell:Row:col:)]) {
-//				fillColor = [self.dataSource pixelColorForDigitCell:self Row:row col:col];
-//				CGContextSetFillColorWithColor(ctx, fillColor.CGColor);
-//				CGContextFillRect(ctx, CGRectMake(col*stretchedPixelSize, row*stretchedPixelSize, stretchedPixelSize, stretchedPixelSize));
-//			}
-//		}
-//	}
-//}
+- (void)layoutSubviews {
+	// layout image view
+	
+	CGFloat imageSize = 0;
+	
+	if ([self.delegate respondsToSelector:@selector(imageSize)]) {
+		imageSize = [self.delegate imageSize];
+	}
+	
+	[_imageView setFrame:CGRectMake((self.bounds.size.width - imageSize)/2, 0, imageSize, imageSize)];
+	
+	// layout classification label
+	CGFloat labelHeight = CLASSIFICATION_LABEL_FONT_SIZE;
+	[_classificationLabel setFrame:CGRectMake(0, imageSize + (self.bounds.size.height - imageSize - labelHeight)/2, self.bounds.size.width, labelHeight)];
+}
 
 @end

@@ -8,7 +8,6 @@
 
 #import "DigitTrainingCollectionViewController.h"
 #import "DigitTestingCollectionViewController.h"
-#import "DigitDetailsViewController.h"
 #import "DigitTrainingOperation.h"
 #import "DigitParser.h"
 #import "DigitLabelParser.h"
@@ -16,6 +15,7 @@
 #import "QueuePool.h"
 #import "ImageMaker.h"
 
+#define TRAINING_CELL_SIZE_MULTIPLIER 2
 #define DIGIT_TRAINING_NAVIGATION_ITEM_TITLE @"Training"
 #define TRAIN_BUTTON_TITLE @"Train"
 #define TEST_SET_BUTTON_TITLE @"Test set"
@@ -92,28 +92,20 @@
 	cell.delegate = self;
 	cell.dataSource = self;
 
+	// set image
 	UIImage *digitImage = _digitImages[indexPath.row];
 	[cell.imageView setImage:digitImage];
+	
+	// set text
+	[cell.classificationLabel setText:[NSString stringWithFormat:@"%d", mDigitSet.digitLabels[indexPath.row]]];
 	
 	return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger digitCellSize = DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER/2;
+	NSUInteger digitCellSize = DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER*TRAINING_CELL_SIZE_MULTIPLIER;
 	
 	return CGSizeMake(digitCellSize, digitCellSize);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	Digit selectedDigit = mDigitSet.digits[indexPath.row];
-	
-	DigitDetailsViewController *digitDetailsViewController = [[DigitDetailsViewController alloc] initWithDigit:selectedDigit];
-	UINavigationController *digitDetailsNavController = [[UINavigationController alloc] initWithRootViewController:digitDetailsViewController];
-	
-	[digitDetailsNavController setModalPresentationStyle:UIModalPresentationFormSheet];
-	[digitDetailsNavController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-	
-	[self presentViewController:digitDetailsNavController animated:YES completion:nil];
 }
 
 - (void)parseDigitLabels {
@@ -211,8 +203,8 @@
 
 #pragma mark - Digit Collection View Cell Delegate
 
-- (CGFloat)cellSize {
-	return (CGFloat)DIGIT_SIZE;
+- (CGFloat)imageSize {
+	return (CGFloat)(DIGIT_SIZE*DIGIT_SIZE_MULTIPLIER);
 }
 
 #pragma mark - Digit Collection View Cell Data Source

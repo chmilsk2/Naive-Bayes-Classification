@@ -12,7 +12,7 @@
 
 @protocol DigitCollectionViewDelegate <NSObject>
 
-- (CGFloat)cellSize;
+- (CGFloat)imageSize;
 
 @end
 
@@ -27,5 +27,6 @@
 @property (nonatomic, weak) id <DigitCollectionViewDelegate> delegate;
 @property (nonatomic, weak) id <DigitCollectionViewDataSource> dataSource;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *classificationLabel;
 
 @end

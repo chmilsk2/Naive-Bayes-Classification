@@ -15,5 +15,5 @@
 	#import <Foundation/Foundation.h>
 #endif
 
-#define DIGIT_SIZE_MULTIPLIER 4
+#define DIGIT_SIZE_MULTIPLIER 1
 #define NUMBER_OF_DIGIT_CLASSES 10

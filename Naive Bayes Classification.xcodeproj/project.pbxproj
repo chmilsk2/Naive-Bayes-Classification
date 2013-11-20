@@ -12,7 +12,6 @@
 		0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */; };
 		0537E39918382C82002A3F1C /* testimages.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39718382C82002A3F1C /* testimages.txt */; };
 		0537E39A18382C82002A3F1C /* testlabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0537E39818382C82002A3F1C /* testlabels.txt */; };
-		0537E39D183850FB002A3F1C /* DigitDetailsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */; };
 		0537E3A018385A5C002A3F1C /* DigitDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E39F18385A5C002A3F1C /* DigitDetailsView.m */; };
 		0537E3A31838A8DC002A3F1C /* QueuePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3A21838A8DC002A3F1C /* QueuePool.m */; };
 		0537E3A61838A9D1002A3F1C /* DigitTrainingOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0537E3A51838A9D1002A3F1C /* DigitTrainingOperation.mm */; };
@@ -60,8 +59,6 @@
 		0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitTestingCollectionViewController.mm; sourceTree = "<group>"; };
 		0537E39718382C82002A3F1C /* testimages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testimages.txt; sourceTree = "<group>"; };
 		0537E39818382C82002A3F1C /* testlabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testlabels.txt; sourceTree = "<group>"; };
-		0537E39B183850FB002A3F1C /* DigitDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitDetailsViewController.h; sourceTree = "<group>"; };
-		0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitDetailsViewController.mm; sourceTree = "<group>"; };
 		0537E39E18385A5C002A3F1C /* DigitDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitDetailsView.h; sourceTree = "<group>"; };
 		0537E39F18385A5C002A3F1C /* DigitDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitDetailsView.m; sourceTree = "<group>"; };
 		0537E3A11838A8DC002A3F1C /* QueuePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueuePool.h; sourceTree = "<group>"; };
@@ -204,8 +201,6 @@
 				0545971F182F050A00D2223A /* DigitTrainingCollectionViewController.mm */,
 				0537E39318382514002A3F1C /* DigitTestingCollectionViewController.h */,
 				0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */,
-				0537E39B183850FB002A3F1C /* DigitDetailsViewController.h */,
-				0537E39C183850FB002A3F1C /* DigitDetailsViewController.mm */,
 				05ADBD101839BB6E004F0BC7 /* DigitStatisticsViewController.h */,
 				05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.m */,
 				05ADBD131839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.h */,
@@ -397,7 +392,6 @@
 				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
 				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
 				0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */,
-				0537E39D183850FB002A3F1C /* DigitDetailsViewController.mm in Sources */,
 				0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */,
 				05ADBD151839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m in Sources */,
 				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
