@@ -123,18 +123,18 @@ void OddsRatio::setImageBufferRGBForRowColAndType(int r, int g, int b, int row, 
 #pragma mark - Heat Map Color
 
 void OddsRatio::heatMapColor(float value, int *red, int *green, int *blue) {
-	const int numColors = 7;
+	const int numColors = 5;
 	const int numColorComponents = 3;
 	
-	// A static array of 5 colors:  (black, blue, cyan, green, yellow, red) using {r,g,b} for each.
-	static float color[numColors][numColorComponents] = { {0,0,0}, {0,0,1}, {0,1,1}, {0,1,0}, {1,1,0}, {1,0,0}, {1,1,1} };
+	// A static array of 5 colors:  (blue, cyan, green, yellow, red) using {r,g,b} for each.
+	static float color[numColors][numColorComponents] = { {0,0,1}, {0,1,1}, {0,1,0}, {1,1,0}, {1,0,0} };
 	
 	// desired color will be between these two indices in the color array
 	int index1;
 	int index2;
 	
 	// fraction between index 1 and index 2 where the desired value is
-	int fractionBetween = 0;
+	float fractionBetween = 0;
 	
 	// accounts for inputs <= 0
 	if (value <= 0) {

@@ -160,8 +160,7 @@
 				double likelihood2 = mTrainingDigitSet.likelihoodForRowColumnAndClassIndex(row, col, oddsRatio.secondDigitClass());
 				double likelihood2LogValue = log10(likelihood2);
 				
-				double oddsRatioValue = likelihood1/likelihood2;
-				double oddsRatioLogValue = log10(oddsRatioValue);
+				double oddsRatioLogValue = likelihood1LogValue - likelihood2LogValue;
 				
 				if (likelihood1LogValue < mostNegativeLikelihood1LogValue) {
 					mostNegativeLikelihood1LogValue = likelihood1LogValue;
@@ -209,8 +208,6 @@
 				oddsRatio.RGBValuesForLogLikelihood(likelihood1LogValue, componentValues, mostNegativeLikelihood1LogValue, mostPositiveLikelihood1LogValue);
 				oddsRatio.setImageBufferRGBForRowColAndType(componentValues[0], componentValues[1], componentValues[2], row, col, OddsRatioTypeLikelihood1);
 				
-				cout << "likelihood1LogValue: " << likelihood1LogValue << endl;
-				
 				// second likelihood buffer
 				double likelihood2 = mTrainingDigitSet.likelihoodForRowColumnAndClassIndex(row, col, oddsRatio.secondDigitClass());
 				double likelihood2LogValue = log10(likelihood2);
@@ -219,8 +216,7 @@
 				
 				// odds ratio buffer
 				// odds(Fij=1, c1, c2) = P(Fij=1 | c1) / P(Fij=1 | c2)
-				double oddsRatioValue = likelihood1/likelihood2;
-				double oddsRatioLogValue = log10(oddsRatioValue);
+				double oddsRatioLogValue = likelihood1LogValue - likelihood2LogValue;
 				oddsRatio.RGBValuesForLogLikelihood(oddsRatioLogValue, componentValues, mostNegativeOddsRatioLogValue, mostPositiveOddsRatioLogValue);
 				oddsRatio.setImageBufferRGBForRowColAndType(componentValues[0], componentValues[1], componentValues[2], row, col, OddsRatioTypeRatio);
 			}
