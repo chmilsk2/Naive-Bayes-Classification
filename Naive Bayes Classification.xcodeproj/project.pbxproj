@@ -36,8 +36,8 @@
 		05ABC020182EF0AF00116729 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05ABC01E182EF0AF00116729 /* InfoPlist.strings */; };
 		05ABC022182EF0B000116729 /* Naive_Bayes_ClassificationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ABC021182EF0B000116729 /* Naive_Bayes_ClassificationTests.m */; };
 		05ADBD0C18397575004F0BC7 /* DigitStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD0A18397575004F0BC7 /* DigitStatistics.cpp */; };
-		05ADBD121839BB6E004F0BC7 /* DigitStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.m */; };
-		05ADBD151839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m */; };
+		05ADBD121839BB6E004F0BC7 /* DigitStatisticsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.mm */; };
+		05ADBD151839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,9 +100,9 @@
 		05ADBD0B18397575004F0BC7 /* DigitStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitStatistics.h; sourceTree = "<group>"; };
 		05ADBD0D1839A377004F0BC7 /* DigitClassificaitonRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitClassificaitonRule.h; sourceTree = "<group>"; };
 		05ADBD101839BB6E004F0BC7 /* DigitStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitStatisticsViewController.h; sourceTree = "<group>"; };
-		05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitStatisticsViewController.m; sourceTree = "<group>"; };
+		05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitStatisticsViewController.mm; sourceTree = "<group>"; };
 		05ADBD131839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitPrototypicalInstancesViewController.h; sourceTree = "<group>"; };
-		05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitPrototypicalInstancesViewController.m; sourceTree = "<group>"; };
+		05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DigitPrototypicalInstancesViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,9 +202,9 @@
 				0537E39318382514002A3F1C /* DigitTestingCollectionViewController.h */,
 				0537E39418382514002A3F1C /* DigitTestingCollectionViewController.mm */,
 				05ADBD101839BB6E004F0BC7 /* DigitStatisticsViewController.h */,
-				05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.m */,
+				05ADBD111839BB6E004F0BC7 /* DigitStatisticsViewController.mm */,
 				05ADBD131839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.h */,
-				05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m */,
+				05ADBD141839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.mm */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -387,13 +387,13 @@
 				0537E3A31838A8DC002A3F1C /* QueuePool.m in Sources */,
 				057C9BEB18393F4000458D8A /* DigitTestingOperation.mm in Sources */,
 				05ABC009182EF0AF00116729 /* main.m in Sources */,
-				05ADBD121839BB6E004F0BC7 /* DigitStatisticsViewController.m in Sources */,
+				05ADBD121839BB6E004F0BC7 /* DigitStatisticsViewController.mm in Sources */,
 				0507068A183B13BA0074EC5B /* ImageMaker.m in Sources */,
 				05AB271B182F4D7D0097D95A /* DigitSet.cpp in Sources */,
 				056761F8182F14D700C1A3EA /* DigitParser.cpp in Sources */,
 				0537E39518382514002A3F1C /* DigitTestingCollectionViewController.mm in Sources */,
 				0537E3921838006D002A3F1C /* DigitCollectionViewCell.m in Sources */,
-				05ADBD151839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.m in Sources */,
+				05ADBD151839BF04004F0BC7 /* DigitPrototypicalInstancesViewController.mm in Sources */,
 				05AB2718182F49F00097D95A /* DigitLabelParser.cpp in Sources */,
 				05459720182F050A00D2223A /* DigitTrainingCollectionViewController.mm in Sources */,
 				05AB271E182F63820097D95A /* Digit.cpp in Sources */,

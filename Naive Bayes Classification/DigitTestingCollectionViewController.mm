@@ -39,6 +39,7 @@
 	UIColor *_correctClassificationTextColor;
 	UIColor *_incorrectClassificationTextColor;
 	NSArray *_digitImages;
+	ClassificationRule _classificationRule;
 }
 
 - (id)initWithCollectionViewLayout:(UICollectionViewFlowLayout *)flowLayout trainingDigitSet:(DigitSet)trainingDigitSet {
@@ -49,6 +50,9 @@
 		mTrainingDigitSet = trainingDigitSet;
 		_correctClassificationTextColor = [UIColor colorWithRed:46.0/255.0 green:139.0/255.0 blue:87.0/255.0 alpha:1.0];
 		_incorrectClassificationTextColor = [UIColor colorWithRed:1.0 green:99.0/255.0 blue:71.0/255.0 alpha:1.0];
+		
+		// configure classification rule
+		_classificationRule = ClassificationRuleMaximumAPosteriori;
 	}
 	
 	return self;
@@ -103,7 +107,6 @@
 	DigitCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:DigitTestingCollectionViewCellIdentifier forIndexPath:indexPath];
 	
 	cell.delegate = self;
-	cell.dataSource = self;
 	
 	// set image
 	UIImage *digitImage = _digitImages[indexPath.row];
@@ -188,11 +191,8 @@
 
 - (void)testButtonTouched {
 	NSLog(@"Test button touched");
-	
-	// configure classification rule
-	ClassificationRule classificationRule = ClassificationRuleMaximumAPosteriori;
-	
-	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet classificationRule:classificationRule];
+
+	DigitTestingOperation *digitTestingOperation = [[DigitTestingOperation alloc] initWithTestDigitSet:mTestingDigitSet trainingDigitSet:mTrainingDigitSet classificationRule:_classificationRule];
 	[digitTestingOperation setDelegate:self];
 	
 	digitTestingOperation.digitTestingOperationCompletionBlock = ^(DigitSet testedDigitSet) {
@@ -227,7 +227,8 @@
 - (void)statisticsButtonTouched {
 	NSLog(@"Statistics button touched");
 	
-	DigitStatisticsViewController *digitStatisticsViewController = [[DigitStatisticsViewController alloc] init];
+	DigitStatisticsViewController *digitStatisticsViewController = [[DigitStatisticsViewController alloc] initWithDigitSet:mTestingDigitSet
+																										classificationRule:_classificationRule];
 	
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:digitStatisticsViewController];
 		

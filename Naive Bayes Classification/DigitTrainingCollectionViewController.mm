@@ -90,7 +90,6 @@
 	DigitCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:DigitTrainingCollectionViewCellIdentifier forIndexPath:indexPath];
 
 	cell.delegate = self;
-	cell.dataSource = self;
 
 	// set image
 	UIImage *digitImage = _digitImages[indexPath.row];
@@ -249,6 +248,10 @@
 	} completion:^(BOOL finished) {
 		[_progressView setProgress:0.0];
 	}];
+}
+
+- (void)didReceiveMemoryWarning {
+	[super didReceiveMemoryWarning];
 }
 
 @end

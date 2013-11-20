@@ -10,6 +10,6 @@
 #import "DigitOperationDelegate.h"
 #import "DigitCollectionViewCell.h"
 
-@interface DigitTrainingCollectionViewController : UICollectionViewController <DigitCollectionViewDataSource, DigitCollectionViewDelegate, DigitOperationDelegate>
+@interface DigitTrainingCollectionViewController : UICollectionViewController <DigitCollectionViewDelegate, DigitOperationDelegate>
 
 @end

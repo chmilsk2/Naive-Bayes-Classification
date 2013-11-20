@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DigitSet.h"
+#import "DigitClassificaitonRule.h"
+#import "DigitCollectionViewCell.h"
 
-@interface DigitPrototypicalInstancesViewController : UIViewController
+@interface DigitPrototypicalInstancesViewController : UICollectionViewController <DigitCollectionViewDelegate>
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout DigitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule;
 
 @end

@@ -14,6 +14,21 @@
 @implementation DigitStatisticsViewController {
 	UIBarButtonItem *_cancelButton;
 	UIBarButtonItem *_prototypicalInstancesButton;
+	ClassificationRule _classificationRule;
+	DigitSet mDigitSet;
+	UIColor *_backgroundColor;
+}
+
+- (id)initWithDigitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule {
+	self = [super init];
+	
+	if (self) {
+		_classificationRule = classificationRule;
+		mDigitSet = digitSet;
+		_backgroundColor = [UIColor whiteColor];
+	}
+	
+	return self;
 }
 
 - (void)viewDidLoad
@@ -21,6 +36,7 @@
     [super viewDidLoad];
 	
 	[self setUpNavigation];
+	[self.view setBackgroundColor:_backgroundColor];
 }
 
 - (void)setUpNavigation {
@@ -54,10 +70,11 @@
 	return _prototypicalInstancesButton;
 }
 
-#pragma mark - Prototypical Instnaces Button Touched
+#pragma mark - Prototypical Instances Button Touched
 
 - (void)prototypicalInstancesButtonTouched {
-	DigitPrototypicalInstancesViewController *prototypicalInstancesViewController = [[DigitPrototypicalInstancesViewController alloc] init];
+	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+	DigitPrototypicalInstancesViewController *prototypicalInstancesViewController = [[DigitPrototypicalInstancesViewController alloc] initWithCollectionViewLayout:flowLayout DigitSet:mDigitSet classificationRule:_classificationRule];
 	[self.navigationController pushViewController:prototypicalInstancesViewController animated:YES];
 }
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DigitSet.h"
+#import "DigitClassificaitonRule.h"
 
 @interface DigitStatisticsViewController : UIViewController
+
+- (id)initWithDigitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule;
 
 @end
