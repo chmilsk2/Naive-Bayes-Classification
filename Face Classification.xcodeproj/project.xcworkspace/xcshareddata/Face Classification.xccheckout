@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>62A4B6AF-7AEA-4DF4-AB2C-7DEDBA258882</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Face Classification</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0E7994DE-1585-4043-9C9C-6902E83E3C04</key>
+		<string>ssh://github.com/chmilsk2/Naive-Bayes-Classification.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Face Classification.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0E7994DE-1585-4043-9C9C-6902E83E3C04</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/chmilsk2/Naive-Bayes-Classification.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0E7994DE-1585-4043-9C9C-6902E83E3C04</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0E7994DE-1585-4043-9C9C-6902E83E3C04</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Naive-Bayes-Classification</string>
+		</dict>
+	</array>
+</dict>
+</plist>

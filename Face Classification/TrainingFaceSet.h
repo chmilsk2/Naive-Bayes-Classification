@@ -14,22 +14,43 @@
 #include <map>
 
 class TrainingFaceSet : public FaceSet {
-	// frequency map keeps track of the # of instances from each class
-	map<int, int> mFrequencyMap;
-	
+	// bit shift size
+	int mBitShiftSize;
+
 	// pixel frequency map keeps track of the pixel frequency map for each class
-	map<int, int> mPixelFrequencyMap;
+	map<int, map<int, int>> mPixelFrequencyMaps;
 	
 	// prior probabilities for each class
-	map<int, double> mPriorProbabilityMaps;
+	map<int, double> mPriorProbabilityMap;
 	
 	// likelihood maps keep track of P(Fij | class) for every pixel location (i,j) and for every class
 	map<int, map<int, double>> mLikelihoodMaps;
 	
 public:
 	TrainingFaceSet();
-	TrainingFaceSet(vector<bool> faceLabels, vector<Face> faces);
+	TrainingFaceSet(vector<int> faceLabels, vector<Face> faces, map<int, int> frequencyMap);
 	~TrainingFaceSet();
+	
+	// pixel frequency
+	map<int, int> & pixelFrequencyMapForClassIndex(int classIndex);
+	void updatePixelFrequencyMapUsingRowAndColumnForClassIndex(int row, int col, Face & face, int classIndex);
+	int pixelFrequencyForRowColumnAndClassIndex(int row, int col, int classIndex);
+	
+	// prior probabilities
+	map<int, double> & priorProbabilityMap();
+	void updatePriorProbabilityForClassIndex(int classIndex);
+	
+	// likelihoood
+	map<int, double> & likelihoodMapForClassIndex(int classIndex);
+	void updateLikelihoodMapUsingRowAndColumnForClassIndex(int row, int col, int classIndex, double likelihood);
+	double likelihoodForRowColumnAndClassIndex(int row, int col, int classIndex);
+	
+	void printPixelFrequencyMaps();
+	void printLikelihoodMaps();
+	
+private:
+	int bitShiftSizeUsingFaceSize(int width, int height);
+	int pixelIndexForRowAndColumn(int row, int col);
 };
 
 #endif /* defined(__Face_Classification__TrainingFaceSet__) */

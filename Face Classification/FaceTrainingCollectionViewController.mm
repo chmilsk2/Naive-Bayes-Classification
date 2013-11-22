@@ -14,12 +14,15 @@
 #import "ColorRule.h"
 #import "ColorMapper.h"
 #import "TrainingFaceSet.h"
+#import "FaceTrainingOperation.h"
+#import "QueuePool.h"
 
 #define TRAINING_FACE_COLLECTION_VIEW_SIZE_MULTIPLIER 2
 #define TRAIN_NAVIGATION_ITEM_TITLE @"Train"
 #define TEST_SET_NAVIGATION_ITEM_TITLE @"Test set"
 #define FACE_TRAINING_LABELS_TEXT_NAME @"facedatatrainlabels"
 #define FACE_TRAINING_DATA_TEXT_NAME @"facedatatrain"
+#define DIGIT_TRAINING_PROGRESS_VIEW_FADE_DURATION 2.0
 #define FaceTrainingCollectionViewCellIdentifier @"FaceTrainingCollectionViewCellIdentifier"
 
 @implementation FaceTrainingCollectionViewController {
@@ -27,6 +30,7 @@
 	NSArray *_faceImages;
 	UIBarButtonItem *_trainButton;
 	UIBarButtonItem *_testSetButton;
+	UIProgressView *_progressView;
 	UIColor *_backgroundColor;
 }
 
@@ -50,12 +54,13 @@
 	
 	[self setUpNavigation];
 	[self setUpCollection];
+	[self setUpProgressView];
 	
 	// parse data from files
-	pair<vector<bool>, vector<vector<char>>> parsedPair = [self parseTrainingFiles];
+	pair<vector<int>, vector<vector<char>>> parsedPair = [self parseTrainingFiles];
 	
 	// faceLabels
-	vector<bool> faceLabels = parsedPair.first;
+	vector<int> faceLabels = parsedPair.first;
 	
 	// faces
 	vector<Face> faces = [self facesWithFaceDatas:parsedPair.second	faceLabels:parsedPair.first];
@@ -63,8 +68,11 @@
 	// color map face data
 	[self colorMapFaces:faces];
 	
+	// class frequency map
+	map<int, int> frequencyMap = [self frequencyMapWithFaceLabels:faceLabels];
+	
 	// training face set
-	mTrainingFaceSet = TrainingFaceSet(faceLabels, faces);
+	mTrainingFaceSet = TrainingFaceSet(faceLabels, faces, frequencyMap);
 	
 	// face images
 	_faceImages = [self faceImagesForFaces:faces];
@@ -83,6 +91,20 @@
 	[self.collectionView setBackgroundColor:_backgroundColor];
 }
 
+- (void)setUpProgressView {
+	[self.navigationController.navigationBar addSubview:self.progressView];
+}
+
+- (UIProgressView *)progressView {
+	if (!_progressView) {
+		_progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+		[_progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height - _progressView.frame.size.height, self.view.frame.size.width, _progressView.frame.size.height)];
+		[_progressView setAlpha:0.0];
+	}
+	
+	return _progressView;
+}
+
 #pragma mark - Collection
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -94,6 +116,8 @@
 	
 	UIImage *faceImage = _faceImages[indexPath.row];
 	[cell.imageView setImage:faceImage];
+	
+	[cell.classificationLabel setText:[NSString stringWithFormat:@"%d", mTrainingFaceSet.faces()[indexPath.row].faceClass()]];
 	
 	return cell;
 }
@@ -112,6 +136,19 @@
 
 - (void)trainButtonTouched {
 	NSLog(@"Train button touched");
+	
+	FaceTrainingOperation *faceTrainingOperation = [[FaceTrainingOperation alloc] initWithFaceSet:mTrainingFaceSet];
+	[faceTrainingOperation setDelegate:self];
+	
+	faceTrainingOperation.faceTrainingOperationCompletionBlock = ^(TrainingFaceSet trainingFaceSet) {
+		NSLog(@"finished training");
+		
+		mTrainingFaceSet = trainingFaceSet;
+		
+		[self didFinishUpdatingProgressView];
+	};
+	
+	[[QueuePool sharedQueuePool].queue addOperation:faceTrainingOperation];
 }
 
 #pragma mark - Test Set Button
@@ -124,12 +161,12 @@
 	return _testSetButton;
 }
 
-#pragma mark - Test Button Touched
+#pragma mark - Test Set Button Touched
 
 - (void)testSetButtonTouched {
 	NSLog(@"Test set button touched");
 	
-	FaceTestingCollectionViewController *faceTestingCollectionViewController = [[FaceTestingCollectionViewController alloc] init];
+	FaceTestingCollectionViewController *faceTestingCollectionViewController = [[FaceTestingCollectionViewController alloc] initWithTrainingFaceSet:mTrainingFaceSet];
 	
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:faceTestingCollectionViewController];
 	
@@ -138,24 +175,24 @@
 
 #pragma mark - Parse Training Files
 
-- (pair<vector<bool>, vector<vector<char>>>)parseTrainingFiles {
+- (pair<vector<int>, vector<vector<char>>>)parseTrainingFiles {
 	// parse face labels
-	vector<bool> faceLabels = [self parseTrainingLabels];
+	vector<int> faceLabels = [self parseTrainingLabels];
 	
 	// parse face datas
 	vector<vector<char>> faceDatas = [self parseTrainingFaceData];
 	
-	pair<vector<bool>, vector<vector<char>>> parsedPair(faceLabels, faceDatas);
+	pair<vector<int>, vector<vector<char>>> parsedPair(faceLabels, faceDatas);
 	
 	return parsedPair;
 }
 
 #pragma mark - Parse Training Labels
 
-- (vector<bool>)parseTrainingLabels {
+- (vector<int>)parseTrainingLabels {
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:FACE_TRAINING_LABELS_TEXT_NAME ofType:@"txt"];
 	FaceLabelParser faceLabelParser(filePath.fileSystemRepresentation);
-	vector<bool> faceLabels = faceLabelParser.parseFaceLabels();
+	vector<int> faceLabels = faceLabelParser.parseFaceLabels();
 	
 	return faceLabels;
 }
@@ -172,7 +209,7 @@
 
 #pragma mark - Faces from Data
 
-- (vector<Face>)facesWithFaceDatas:(vector<vector<char>>)faceDatas faceLabels:(vector<bool>)faceLabels {
+- (vector<Face>)facesWithFaceDatas:(vector<vector<char>>)faceDatas faceLabels:(vector<int>)faceLabels {
 	vector<Face> faces;
 	
 	int faceIndex = 0;
@@ -186,6 +223,26 @@
 	}
 	
 	return faces;
+}
+
+#pragma mark - Frequency Map with Face Labels
+
+- (map<int, int>)frequencyMapWithFaceLabels:(vector<int>)faceLabels {
+	map<int, int> frequencyMap;
+	
+	for (auto it : faceLabels) {
+		int labelValue = (int)it;
+		
+		if (frequencyMap.count(labelValue) == 0) {
+			frequencyMap[labelValue] = 1;
+		}
+		
+		else {
+			frequencyMap[labelValue]++;
+		}
+	}
+	
+	return frequencyMap;
 }
 
 #pragma mark - Color Map Faces
@@ -229,6 +286,24 @@
 	}
 	
 	return [faceImages copy];
+}
+
+#pragma mark - Digit Training Operation Delegate
+
+- (void)showProgressView {
+	[_progressView setAlpha:1.0];
+}
+
+- (void)setProgress:(float)progress {
+	[_progressView setProgress:progress animated:YES];
+}
+
+- (void)didFinishUpdatingProgressView {
+	[UIView animateWithDuration:DIGIT_TRAINING_PROGRESS_VIEW_FADE_DURATION animations:^{
+		_progressView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[_progressView setProgress:0.0];
+	}];
 }
 
 - (void)didReceiveMemoryWarning

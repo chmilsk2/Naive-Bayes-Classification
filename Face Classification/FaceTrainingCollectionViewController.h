@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FaceCollectionViewCell.h"
+#import "FaceOperationDelegate.h"
 
-@interface FaceTrainingCollectionViewController : UICollectionViewController
+@interface FaceTrainingCollectionViewController : UICollectionViewController <FaceOperationDelegate>
 
 @end

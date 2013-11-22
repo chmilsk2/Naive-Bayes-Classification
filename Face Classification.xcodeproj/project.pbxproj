@@ -13,7 +13,14 @@
 		050F3447183D90F4004077F3 /* ColorRule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 050F3445183D90F4004077F3 /* ColorRule.cpp */; };
 		050F344B183DCAAC004077F3 /* FaceSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 050F3449183DCAAC004077F3 /* FaceSet.cpp */; };
 		050F344E183DCD91004077F3 /* TrainingFaceSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 050F344C183DCD91004077F3 /* TrainingFaceSet.cpp */; };
-		050F3451183DD0B3004077F3 /* FaceTrainingOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 050F344F183DD0B3004077F3 /* FaceTrainingOperation.cpp */; };
+		05489EB1183DD26C00F0A0EA /* FaceTrainingOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05489EB0183DD26C00F0A0EA /* FaceTrainingOperation.mm */; };
+		05489EB7183DDF3800F0A0EA /* QueuePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 05489EB6183DDF3800F0A0EA /* QueuePool.m */; };
+		05489EBA183DEAF100F0A0EA /* FaceTestingOpreation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05489EB9183DEAF100F0A0EA /* FaceTestingOpreation.mm */; };
+		05489EC2183E5D2E00F0A0EA /* TestingFaceSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05489EC0183E5D2E00F0A0EA /* TestingFaceSet.cpp */; };
+		05489EC6183E60E400F0A0EA /* FaceStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05489EC4183E60E400F0A0EA /* FaceStatistics.cpp */; };
+		05489EC9183E626300F0A0EA /* FaceStatisticsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05489EC8183E626300F0A0EA /* FaceStatisticsViewController.mm */; };
+		05489ECC183E632800F0A0EA /* FacePrototypicalInstancesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05489ECB183E632800F0A0EA /* FacePrototypicalInstancesViewController.mm */; };
+		05489ECF183E65DC00F0A0EA /* OddsRatio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05489ECD183E65DC00F0A0EA /* OddsRatio.cpp */; };
 		05A15BF5183D5D6B00C3CB19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A15BF4183D5D6B00C3CB19 /* Foundation.framework */; };
 		05A15BF7183D5D6B00C3CB19 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A15BF6183D5D6B00C3CB19 /* CoreGraphics.framework */; };
 		05A15BF9183D5D6B00C3CB19 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A15BF8183D5D6B00C3CB19 /* UIKit.framework */; };
@@ -59,8 +66,24 @@
 		050F344A183DCAAC004077F3 /* FaceSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceSet.h; sourceTree = "<group>"; };
 		050F344C183DCD91004077F3 /* TrainingFaceSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrainingFaceSet.cpp; sourceTree = "<group>"; };
 		050F344D183DCD91004077F3 /* TrainingFaceSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingFaceSet.h; sourceTree = "<group>"; };
-		050F344F183DD0B3004077F3 /* FaceTrainingOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaceTrainingOperation.cpp; sourceTree = "<group>"; };
-		050F3450183DD0B3004077F3 /* FaceTrainingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceTrainingOperation.h; sourceTree = "<group>"; };
+		05489EAF183DD26C00F0A0EA /* FaceTrainingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceTrainingOperation.h; sourceTree = "<group>"; };
+		05489EB0183DD26C00F0A0EA /* FaceTrainingOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceTrainingOperation.mm; sourceTree = "<group>"; };
+		05489EB3183DD30B00F0A0EA /* FaceOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceOperationDelegate.h; sourceTree = "<group>"; };
+		05489EB5183DDF3800F0A0EA /* QueuePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueuePool.h; sourceTree = "<group>"; };
+		05489EB6183DDF3800F0A0EA /* QueuePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueuePool.m; sourceTree = "<group>"; };
+		05489EB8183DEAF100F0A0EA /* FaceTestingOpreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceTestingOpreation.h; sourceTree = "<group>"; };
+		05489EB9183DEAF100F0A0EA /* FaceTestingOpreation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceTestingOpreation.mm; sourceTree = "<group>"; };
+		05489EBD183E5CBE00F0A0EA /* FaceClassificationRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceClassificationRule.h; sourceTree = "<group>"; };
+		05489EC0183E5D2E00F0A0EA /* TestingFaceSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestingFaceSet.cpp; sourceTree = "<group>"; };
+		05489EC1183E5D2E00F0A0EA /* TestingFaceSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingFaceSet.h; sourceTree = "<group>"; };
+		05489EC4183E60E400F0A0EA /* FaceStatistics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaceStatistics.cpp; sourceTree = "<group>"; };
+		05489EC5183E60E400F0A0EA /* FaceStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceStatistics.h; sourceTree = "<group>"; };
+		05489EC7183E626300F0A0EA /* FaceStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceStatisticsViewController.h; sourceTree = "<group>"; };
+		05489EC8183E626300F0A0EA /* FaceStatisticsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FaceStatisticsViewController.mm; sourceTree = "<group>"; };
+		05489ECA183E632800F0A0EA /* FacePrototypicalInstancesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacePrototypicalInstancesViewController.h; sourceTree = "<group>"; };
+		05489ECB183E632800F0A0EA /* FacePrototypicalInstancesViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacePrototypicalInstancesViewController.mm; sourceTree = "<group>"; };
+		05489ECD183E65DC00F0A0EA /* OddsRatio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OddsRatio.cpp; sourceTree = "<group>"; };
+		05489ECE183E65DC00F0A0EA /* OddsRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OddsRatio.h; sourceTree = "<group>"; };
 		05A15BF1183D5D6B00C3CB19 /* Face Classification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Face Classification.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A15BF4183D5D6B00C3CB19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05A15BF6183D5D6B00C3CB19 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -149,6 +172,8 @@
 				050F3449183DCAAC004077F3 /* FaceSet.cpp */,
 				050F344D183DCD91004077F3 /* TrainingFaceSet.h */,
 				050F344C183DCD91004077F3 /* TrainingFaceSet.cpp */,
+				05489EC1183E5D2E00F0A0EA /* TestingFaceSet.h */,
+				05489EC0183E5D2E00F0A0EA /* TestingFaceSet.cpp */,
 			);
 			name = "Face Set";
 			sourceTree = "<group>";
@@ -156,10 +181,62 @@
 		050F3452183DD0BA004077F3 /* Face Training Operation */ = {
 			isa = PBXGroup;
 			children = (
-				050F3450183DD0B3004077F3 /* FaceTrainingOperation.h */,
-				050F344F183DD0B3004077F3 /* FaceTrainingOperation.cpp */,
+				05489EAF183DD26C00F0A0EA /* FaceTrainingOperation.h */,
+				05489EB0183DD26C00F0A0EA /* FaceTrainingOperation.mm */,
 			);
 			name = "Face Training Operation";
+			sourceTree = "<group>";
+		};
+		05489EB2183DD2E900F0A0EA /* Face Operation Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				05489EB3183DD30B00F0A0EA /* FaceOperationDelegate.h */,
+			);
+			name = "Face Operation Delegate";
+			sourceTree = "<group>";
+		};
+		05489EB4183DDF2200F0A0EA /* Queue Pool */ = {
+			isa = PBXGroup;
+			children = (
+				05489EB5183DDF3800F0A0EA /* QueuePool.h */,
+				05489EB6183DDF3800F0A0EA /* QueuePool.m */,
+			);
+			name = "Queue Pool";
+			sourceTree = "<group>";
+		};
+		05489EBB183DEAFB00F0A0EA /* Face Testing Operation */ = {
+			isa = PBXGroup;
+			children = (
+				05489EB8183DEAF100F0A0EA /* FaceTestingOpreation.h */,
+				05489EB9183DEAF100F0A0EA /* FaceTestingOpreation.mm */,
+			);
+			name = "Face Testing Operation";
+			sourceTree = "<group>";
+		};
+		05489EBC183E5CA300F0A0EA /* Face Classification Rule */ = {
+			isa = PBXGroup;
+			children = (
+				05489EBD183E5CBE00F0A0EA /* FaceClassificationRule.h */,
+			);
+			name = "Face Classification Rule";
+			sourceTree = "<group>";
+		};
+		05489EC3183E60C800F0A0EA /* Face Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				05489EC5183E60E400F0A0EA /* FaceStatistics.h */,
+				05489EC4183E60E400F0A0EA /* FaceStatistics.cpp */,
+			);
+			name = "Face Statistics";
+			sourceTree = "<group>";
+		};
+		05489ED0183E65E400F0A0EA /* Odds Ratio */ = {
+			isa = PBXGroup;
+			children = (
+				05489ECE183E65DC00F0A0EA /* OddsRatio.h */,
+				05489ECD183E65DC00F0A0EA /* OddsRatio.cpp */,
+			);
+			name = "Odds Ratio";
 			sourceTree = "<group>";
 		};
 		05A15BE8183D5D6B00C3CB19 = {
@@ -260,11 +337,17 @@
 			children = (
 				050F343F183D8B7E004077F3 /* Face */,
 				050F3448183DCA99004077F3 /* Face Set */,
+				05489EC3183E60C800F0A0EA /* Face Statistics */,
+				05489ED0183E65E400F0A0EA /* Odds Ratio */,
 				05F05DA3183D68DD005522F3 /* Face Label Parser */,
 				05F05DA4183D68E9005522F3 /* Face Data Parser */,
 				050F3452183DD0BA004077F3 /* Face Training Operation */,
+				05489EBB183DEAFB00F0A0EA /* Face Testing Operation */,
+				05489EB2183DD2E900F0A0EA /* Face Operation Delegate */,
 				050F3443183D90BE004077F3 /* Color Mapper */,
 				050F3444183D90DB004077F3 /* Color Rule */,
+				05489EB4183DDF2200F0A0EA /* Queue Pool */,
+				05489EBC183E5CA300F0A0EA /* Face Classification Rule */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -285,6 +368,10 @@
 				05A15C2E183D5F2000C3CB19 /* FaceTrainingCollectionViewController.mm */,
 				05BC885F183D61B300D48601 /* FaceTestingCollectionViewController.h */,
 				05BC8860183D61B300D48601 /* FaceTestingCollectionViewController.mm */,
+				05489EC7183E626300F0A0EA /* FaceStatisticsViewController.h */,
+				05489EC8183E626300F0A0EA /* FaceStatisticsViewController.mm */,
+				05489ECA183E632800F0A0EA /* FacePrototypicalInstancesViewController.h */,
+				05489ECB183E632800F0A0EA /* FacePrototypicalInstancesViewController.mm */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -406,17 +493,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05489EB1183DD26C00F0A0EA /* FaceTrainingOperation.mm in Sources */,
 				050F343E183D8B78004077F3 /* Face.cpp in Sources */,
 				050F3447183D90F4004077F3 /* ColorRule.cpp in Sources */,
 				050F344B183DCAAC004077F3 /* FaceSet.cpp in Sources */,
 				050F344E183DCD91004077F3 /* TrainingFaceSet.cpp in Sources */,
 				05BC8864183D623B00D48601 /* FaceCollectionViewCell.m in Sources */,
+				05489EC9183E626300F0A0EA /* FaceStatisticsViewController.mm in Sources */,
 				050F3442183D90B4004077F3 /* ColorMapper.cpp in Sources */,
+				05489EBA183DEAF100F0A0EA /* FaceTestingOpreation.mm in Sources */,
+				05489ECC183E632800F0A0EA /* FacePrototypicalInstancesViewController.mm in Sources */,
 				05BC8861183D61B300D48601 /* FaceTestingCollectionViewController.mm in Sources */,
+				05489ECF183E65DC00F0A0EA /* OddsRatio.cpp in Sources */,
 				05F05DA7183D6914005522F3 /* FaceLabelParser.cpp in Sources */,
-				050F3451183DD0B3004077F3 /* FaceTrainingOperation.cpp in Sources */,
+				05489EC6183E60E400F0A0EA /* FaceStatistics.cpp in Sources */,
 				05A15C05183D5D6B00C3CB19 /* AppDelegate.m in Sources */,
 				05A15C01183D5D6B00C3CB19 /* main.m in Sources */,
+				05489EC2183E5D2E00F0A0EA /* TestingFaceSet.cpp in Sources */,
+				05489EB7183DDF3800F0A0EA /* QueuePool.m in Sources */,
 				05A15C2F183D5F2000C3CB19 /* FaceTrainingCollectionViewController.mm in Sources */,
 				050F343B183D83A3004077F3 /* FaceDataParser.cpp in Sources */,
 			);

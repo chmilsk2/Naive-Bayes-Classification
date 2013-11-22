@@ -12,21 +12,36 @@
 #include <iostream>
 #include "Face.h"
 #include <vector>
+#include <map>
 
 class FaceSet {
-	vector<bool> mFaceLabels;
+	vector<int> mFaceLabels;
 	vector<Face> mFaces;
+	map<int, int> mFrequencyMap;
 	
 public:
 	FaceSet();
-	FaceSet(vector<bool> faceLabels, vector<Face> faces);
+	FaceSet(vector<int> faceLabels, vector<Face> faces, map<int, int> frequencyMap);
 	~FaceSet();
 	
+	// face labels
+	vector<int> & faceLabels();
+	
 	// face label
-	bool faceLabel(int index);
+	int faceLabel(int index);
+	
+	// faces
+	vector<Face> & faces();
 	
 	// face
-	Face face(int index);
+	Face & face(int index);
+	
+	// frequency map keeps track of the # of instances from each class
+	map<int, int> & frequencyMap();
+	int frequencyForClassIndex(int classIndex);
+	
+	// logging
+	void printFrequencyMap();
 };
 
 #endif /* defined(__Face_Classification__FaceSet__) */

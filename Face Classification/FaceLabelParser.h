@@ -21,7 +21,7 @@ public:
 	FaceLabelParser(const char *filePath);
 	~FaceLabelParser();
 	
-	vector<bool> parseFaceLabels();
+	vector<int> parseFaceLabels();
 };
 
 #endif /* defined(__Face_Classification__FaceLabelParser__) */

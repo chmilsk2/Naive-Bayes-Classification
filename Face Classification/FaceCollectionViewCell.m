@@ -20,7 +20,6 @@
     if (self) {
 		[self setUpImageView];
 		[self setUpClassificationLabel];
-		[self.contentView setBackgroundColor:[UIColor blackColor]];
     }
 	
     return self;

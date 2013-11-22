@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrainingFaceSet.h"
+#import "FaceOperationDelegate.h"
 
-@interface FaceTestingCollectionViewController : UICollectionViewController
+@interface FaceTestingCollectionViewController : UICollectionViewController <FaceOperationDelegate>
+
+- (id)initWithTrainingFaceSet:(TrainingFaceSet)trainingFaceSet;
 
 @end

@@ -120,7 +120,7 @@
 
 - (void)prototypicalInstancesButtonTouched {
 	UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-	DigitPrototypicalInstancesViewController *prototypicalInstancesViewController = [[DigitPrototypicalInstancesViewController alloc] initWithCollectionViewLayout:flowLayout DigitSet:mTestingDigitSet classificationRule:_classificationRule];
+	DigitPrototypicalInstancesViewController *prototypicalInstancesViewController = [[DigitPrototypicalInstancesViewController alloc] initWithCollectionViewLayout:flowLayout digitSet:mTestingDigitSet classificationRule:_classificationRule];
 	[self.navigationController pushViewController:prototypicalInstancesViewController animated:YES];
 }
 

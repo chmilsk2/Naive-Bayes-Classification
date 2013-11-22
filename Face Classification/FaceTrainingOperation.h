@@ -6,9 +6,17 @@
 //  Copyright (c) 2013 Troy Chmieleski. All rights reserved.
 //
 
-#ifndef __Face_Classification__FaceTrainingOperation__
-#define __Face_Classification__FaceTrainingOperation__
+#import <Foundation/Foundation.h>
+#import "FaceOperationDelegate.h"
+#import "TrainingFaceSet.h"
 
-#include <iostream>
+typedef void(^FaceTrainingOperationHandler)(TrainingFaceSet trainingFaceSet);
 
-#endif /* defined(__Face_Classification__FaceTrainingOperation__) */
+@interface FaceTrainingOperation : NSOperation
+
+@property (copy) FaceTrainingOperationHandler faceTrainingOperationCompletionBlock;
+@property (nonatomic, weak) id <FaceOperationDelegate> delegate;
+
+- (id)initWithFaceSet:(TrainingFaceSet)trainingFaceSet;
+
+@end

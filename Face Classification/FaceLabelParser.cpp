@@ -15,8 +15,8 @@ FaceLabelParser::FaceLabelParser(const char *filePath):mFilePath(filePath) {};
 
 FaceLabelParser::~FaceLabelParser() {};
 
-vector<bool> FaceLabelParser::parseFaceLabels() {
-	vector<bool> faceLabels;
+vector<int> FaceLabelParser::parseFaceLabels() {
+	vector<int> faceLabels;
 	
 	string line;
 	
@@ -24,16 +24,7 @@ vector<bool> FaceLabelParser::parseFaceLabels() {
 	
 	if (faceLabelFile.is_open()) {
 		while (getline(faceLabelFile, line)) {
-			int labelIntValue = atoi(line.c_str());
-			bool labelValue;
-			
-			if (labelIntValue == 0) {
-				labelValue = false;
-			}
-			
-			else {
-				labelValue = true;
-			}
+			int labelValue = atoi(line.c_str());
 			
 			faceLabels.push_back(labelValue);
 		}

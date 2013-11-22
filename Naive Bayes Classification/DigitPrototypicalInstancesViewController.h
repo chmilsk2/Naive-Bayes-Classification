@@ -13,6 +13,6 @@
 
 @interface DigitPrototypicalInstancesViewController : UICollectionViewController <DigitCollectionViewDelegate>
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout DigitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule;
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout digitSet:(DigitSet)digitSet classificationRule:(ClassificationRule)classificationRule;
 
 @end
